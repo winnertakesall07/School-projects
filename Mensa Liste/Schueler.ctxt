@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Schueler
+comment1.params=nameE\ nachfolgerE
+comment1.target=Schueler(java.lang.String,\ Schueler)
+comment2.params=nameE
+comment2.target=void\ einfuegen(java.lang.String)
+comment3.params=
+comment3.target=void\ datenAusgeben()
+comment4.params=
+comment4.target=int\ anzahlSchueler()
+numComments=5

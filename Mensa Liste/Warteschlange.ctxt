@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=Warteschlange
+comment1.params=
+comment1.target=Warteschlange()
+comment2.params=nameE
+comment2.target=void\ einfuegen(java.lang.String)
+comment3.params=
+comment3.target=void\ datenAusgeben()
+comment4.params=
+comment4.target=int\ anzahlSchueler()
+numComments=5

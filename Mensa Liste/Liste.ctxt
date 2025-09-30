@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Liste
+comment1.params=
+comment1.target=Liste()
+comment2.params=inhaltE
+comment2.target=void\ einfuegen(Daten)
+numComments=3
