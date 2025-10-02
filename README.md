@@ -5,11 +5,11 @@ public class Mensa {
     String suche;
     boolean[] vegetarisch;
 
-public Mensa()
+public Mensa(int laengelisteE)
 {
     System.out.println("####################");
-    namen = new String[20];
-    vegetarisch = new boolean[20];
+    namen = new String[laengelisteE];
+    vegetarisch = new boolean[laengelisteE];
     namen[position++] = ("Mueller");
     vegetarisch[position] = true;
     namen[position++] = ("Maier");
@@ -59,7 +59,7 @@ if (suche != namen[position]){
 }
 else {
     position++;
-    System.out.println(position);
+    System.out.println(position-1);
     position = 0;  
     System.out.println("--------");
 }
@@ -82,12 +82,23 @@ else {
 }
 }
 public void hinzufuegen(String NameE, boolean vegetarischE, int positionE){
-    namen[positionE-1] = (NameE);
-    vegetarisch[positionE-1] = !vegetarischE;
+    namen[positionE] = (NameE);
+    vegetarisch[positionE] = !vegetarischE;
 }
-
-
-
-// weitere Methoden
+public void loeschen(int positionE){
+    if (positionE != position){
+    position++;
+     if (20 != position){
+         
+     }
+    else {
+        System.out.println("Nicht gefunden");
+        position = 0; 
+        System.out.println("--------");
+    }
+}
+else {
+    
+}
 }
 }
