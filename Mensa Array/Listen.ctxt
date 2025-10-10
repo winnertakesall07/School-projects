@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Listen
+comment1.params=
+comment1.target=Listen()
+comment2.params=
+comment2.target=void\ listeStart()
+comment3.params=
+comment3.target=void\ datenAusgeben()
+comment4.params=
+comment4.target=void\ laengeListe()
+comment5.params=sucheE
+comment5.target=void\ suchen(java.lang.String)
+comment6.params=nameE\ booleanWertE\ positionE\ zahlE
+comment6.target=void\ ersetzen(java.lang.String,\ boolean,\ int,\ int)
+comment7.params=positionE
+comment7.target=void\ loeschen(int)
+comment8.params=nameE\ booleanWertE\ positionE\ zahlE
+comment8.target=void\ hinzufuegen(java.lang.String,\ boolean,\ int,\ int)
+numComments=9
