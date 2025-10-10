@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Knoten
+comment1.params=inhaltE\ nachfolgerE
+comment1.target=Knoten(Daten,\ Listenelement)
+comment2.params=inhaltE
+comment2.target=Listenelement\ einfuegen(Daten)
+comment3.params=
+comment3.target=void\ datenAusgeben()
+comment4.params=
+comment4.target=int\ anzahlKnoten()
+comment5.params=nameE
+comment5.target=Daten\ suchen(java.lang.String)
+comment6.params=
+comment6.target=Listenelement\ nachfolgerGeben()
+comment7.params=nameE
+comment7.target=Listenelement\ entfernenName(java.lang.String)
+numComments=8

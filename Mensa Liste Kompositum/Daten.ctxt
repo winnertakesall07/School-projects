@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Daten
+comment1.params=vornameE\ nachnameE\ vegetarischE\ guthabenE\ geschlechtE
+comment1.target=Daten(java.lang.String,\ java.lang.String,\ boolean,\ double,\ char)
+comment2.params=
+comment2.target=void\ datenAusgeben()
+comment3.params=
+comment3.target=java.lang.String\ nameGeben()
+numComments=4

@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Mensa
+comment1.params=
+comment1.target=Mensa()
+comment2.params=inhaltE
+comment2.target=void\ einfuegen(Daten)
+comment3.params=inhaltE
+comment3.target=void\ einfuegenVorne(Daten)
+comment4.params=
+comment4.target=void\ datenAusgeben()
+comment5.params=
+comment5.target=void\ anzahlSchueler()
+comment6.params=nameE
+comment6.target=void\ suchen(java.lang.String)
+comment7.params=
+comment7.target=void\ entfernen()
+comment8.params=nameE
+comment8.target=void\ entfernenName(java.lang.String)
+numComments=9
