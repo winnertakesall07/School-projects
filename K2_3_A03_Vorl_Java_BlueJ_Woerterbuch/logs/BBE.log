@@ -1,0 +1,9 @@
+2025-10-23T08:56:21.937799700	JavaFX Application Thread	---------- Logging instantiated for BBE Version 1.7 ----------
+2025-10-23T08:56:21.948769500	JavaFX Application Thread	LibPath: C:\Program Files\BlueJ\lib
+2025-10-23T08:56:21.950763700	JavaFX Application Thread	ProjectPath: H:\Eigene Dateien\Downloads\K2_3_A03_Vorl_Java_BlueJ_Woerterbuch
+2025-10-23T08:56:21.956747800	JavaFX Application Thread	H:\Eigene Dateien\Downloads\K2_3_A03_Vorl_Java_BlueJ_Woerterbuch\Blockly\BBE.ini is no valid ini file.
+2025-10-23T08:56:21.996642100	JavaFX Application Thread	Key: Logging
+2025-10-23T08:56:22.001628300	JavaFX Application Thread	Key: active Value: false
+2025-10-23T08:56:22.007611	JavaFX Application Thread	Key: Paths
+2025-10-23T08:56:22.010603200	JavaFX Application Thread	Key: jcefBundlePath Value: C:/Users/Public/jcef-bundle/
+2025-10-23T08:56:22.014592700	JavaFX Application Thread	Key: blocklyHtmlPath Value: /Blockly/index.html
