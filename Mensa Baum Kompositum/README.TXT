@@ -1,0 +1,1 @@
+Dieses Projekt implementiert eine Mensa-Verwaltung mithilfe einer Baumstruktur (Kompositum-Muster), um Personen effizient zu suchen und sortiert auszugeben.
