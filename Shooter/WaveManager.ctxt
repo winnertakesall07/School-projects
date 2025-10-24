@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=WaveManager
+comment1.params=gp
+comment1.target=WaveManager(GamePanel)
+comment2.params=
+comment2.target=void\ reset()
+comment3.params=
+comment3.target=void\ startNextWave()
+comment4.params=
+comment4.target=void\ update()
+comment5.params=
+comment5.target=void\ spawnEnemy()
+numComments=6

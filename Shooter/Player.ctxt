@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Player
+comment1.params=
+comment1.target=void\ setDefaultValues()
+comment2.params=gainedXp
+comment2.target=void\ gainXP(int)
+comment3.params=
+comment3.target=void\ levelUp()
+comment4.params=
+comment4.target=void\ update()
+comment5.params=g2
+comment5.target=void\ draw(java.awt.Graphics2D)
+comment6.params=damage
+comment6.target=void\ takeDamage(int)
+numComments=7

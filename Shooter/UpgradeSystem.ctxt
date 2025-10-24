@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=UpgradeSystem
+comment1.params=gp
+comment1.target=UpgradeSystem(GamePanel)
+comment2.params=
+comment2.target=void\ initUpgrades()
+comment3.params=
+comment3.target=void\ generateUpgrades()
+comment4.params=
+comment4.target=void\ selectUpgrade()
+comment5.params=delta
+comment5.target=void\ changeSelection(int)
+comment6.params=g2
+comment6.target=void\ draw(java.awt.Graphics2D)
+numComments=7

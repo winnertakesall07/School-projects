@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=UI
+comment1.params=gp
+comment1.target=UI(GamePanel)
+comment2.params=g2
+comment2.target=void\ draw(java.awt.Graphics2D)
+comment3.params=g2
+comment3.target=void\ drawPlayStateUI(java.awt.Graphics2D)
+comment4.params=g2
+comment4.target=void\ drawLevelUpScreen(java.awt.Graphics2D)
+comment5.params=g2
+comment5.target=void\ drawGameOverScreen(java.awt.Graphics2D)
+comment6.params=text\ g2
+comment6.target=int\ getXforCenteredText(java.lang.String,\ java.awt.Graphics2D)
+numComments=7

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=CollisionChecker
+comment1.params=gp
+comment1.target=CollisionChecker(GamePanel)
+comment2.params=
+comment2.target=void\ checkCollisions()
+numComments=3
