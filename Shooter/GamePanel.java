@@ -36,6 +36,8 @@ public class GamePanel extends JPanel implements Runnable {
     public List<Projectile> projectiles = new ArrayList<>();
     // NEW: enemy projectiles list
     public List<EnemyProjectile> enemyProjectiles = new ArrayList<>();
+    // Alias for compatibility (some code may reference lower-case 'p')
+    public List<EnemyProjectile> enemyprojectiles = enemyProjectiles;
 
     int FPS = 60;
 
