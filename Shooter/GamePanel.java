@@ -34,6 +34,8 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public List<Enemy> enemies = new ArrayList<>();
     public List<Projectile> projectiles = new ArrayList<>();
+    // NEW: enemy projectiles list
+    public List<EnemyProjectile> enemyProjectiles = new ArrayList<>();
 
     int FPS = 60;
 
@@ -76,7 +78,7 @@ public class GamePanel extends JPanel implements Runnable {
             player.update();
             waveManager.update();
 
-            // Update projectiles and check for collisions
+            // Update player projectiles
             Iterator<Projectile> pIterator = projectiles.iterator();
             while (pIterator.hasNext()) {
                 Projectile p = pIterator.next();
@@ -84,6 +86,17 @@ public class GamePanel extends JPanel implements Runnable {
                     p.update();
                 } else {
                     pIterator.remove();
+                }
+            }
+
+            // Update enemy projectiles (NEW)
+            Iterator<EnemyProjectile> epIterator = enemyProjectiles.iterator();
+            while (epIterator.hasNext()) {
+                EnemyProjectile ep = epIterator.next();
+                if (ep.isAlive()) {
+                    ep.update();
+                } else {
+                    epIterator.remove();
                 }
             }
 
@@ -98,12 +111,13 @@ public class GamePanel extends JPanel implements Runnable {
                     eIterator.remove();
                 }
             }
-            
+
+            // All collisions (player <-> enemy bullets, player bullets <-> enemies, explosions, pierce)
             cChecker.checkCollisions();
 
         } else if (gameState == GameState.LEVEL_UP) {
             // Game is paused, waiting for player to choose an upgrade
-             if (keyH.enterPressed) {
+            if (keyH.enterPressed) {
                 upgradeSystem.selectUpgrade();
                 gameState = GameState.PLAY;
                 keyH.enterPressed = false; // Consume the press
@@ -123,21 +137,27 @@ public class GamePanel extends JPanel implements Runnable {
             enemy.draw(g2);
         }
 
-        // Draw Projectiles
+        // Draw Player Projectiles
         for (Projectile p : projectiles) {
             p.draw(g2);
         }
 
+        // Draw Enemy Projectiles (NEW)
+        for (EnemyProjectile ep : enemyProjectiles) {
+            ep.draw(g2);
+        }
+
         // Draw UI
         ui.draw(g2);
-        
+
         g2.dispose();
     }
-    
+
     public void resetGame() {
         player.setDefaultValues();
         enemies.clear();
         projectiles.clear();
+        enemyProjectiles.clear(); // NEW
         waveManager.reset();
         gameState = GameState.PLAY;
     }
