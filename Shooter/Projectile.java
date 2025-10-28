@@ -47,6 +47,14 @@ public class Projectile extends Entity {
         }
     }
 
+    // Compatibility aliases for BlueJ / older references
+    public int getExplosionradius() { return getExplosionRadius(); }
+    public void setExplosionradius(int radius) { setExplosionRadius(radius); }
+    public boolean getpierce() { return canPierce(); }
+    public int getPierce() { return pierce; }
+    public void setColour(Color color) { setColor(color); }
+    public void onhit() { onHit(); }
+
     @Override
     public void update() {
         x += dx * speed;
