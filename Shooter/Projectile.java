@@ -54,6 +54,9 @@ public class Projectile extends Entity {
     public int getPierce() { return pierce; }
     public void setColour(Color color) { setColor(color); }
     public void onhit() { onHit(); }
+    // Additional aliases for lower-case usage found in some environments
+    public void setcolor(Color color) { setColor(color); }
+    public void setpierce(int pierce) { setPierce(pierce); }
 
     @Override
     public void update() {
