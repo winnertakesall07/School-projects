@@ -36,8 +36,12 @@ public class GamePanel extends JPanel implements Runnable {
     public List<Projectile> projectiles = new ArrayList<>();
     // NEW: enemy projectiles list
     public List<EnemyProjectile> enemyProjectiles = new ArrayList<>();
-    // Alias for compatibility (some code may reference lower-case 'p')
-    public List<EnemyProjectile> enemyprojectiles = enemyProjectiles;
+    // Aliases for compatibility with older or mismatched references
+    public List<EnemyProjectile> enemyprojectiles = enemyProjectiles; // lower-case p alias
+    public List<Projectile> Projectiles = projectiles;               // capital P alias
+    public List<Projectile> playerProjectiles = projectiles;         // alternative naming
+    public List<Projectile> bullets = projectiles;                   // alternative naming
+    public List<EnemyProjectile> enemyBullets = enemyProjectiles;    // alternative naming
 
     int FPS = 60;
 
@@ -163,4 +167,8 @@ public class GamePanel extends JPanel implements Runnable {
         waveManager.reset();
         gameState = GameState.PLAY;
     }
+
+    // Optional getters for code that prefers method access
+    public List<Projectile> getProjectiles() { return projectiles; }
+    public List<EnemyProjectile> getEnemyProjectiles() { return enemyProjectiles; }
 }
