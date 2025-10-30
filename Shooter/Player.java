@@ -16,6 +16,10 @@ public class Player extends Entity {
     // Simple cooldown to rate-limit contact damage
     private int contactDamageCooldown = 0;
 
+    // Inventory data
+    public List<Weapon> unlockedWeapons = new ArrayList<>();
+    public List<String> acquiredUpgrades = new ArrayList<>();
+
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
@@ -32,9 +36,28 @@ public class Player extends Entity {
         level = 1;
         xp = 0;
         nextLevelXp = 10;
-        currentWeapon = new Pistol(gp);
+
+        // Reset inventory and add default pistol
+        unlockedWeapons.clear();
+        acquiredUpgrades.clear();
+        addWeaponIfNew(new Pistol(gp));
+        currentWeapon = unlockedWeapons.get(0);
+
         contactDamageCooldown = 0;
         alive = true;
+    }
+
+    public void addWeaponIfNew(Weapon w) {
+        for (Weapon uw : unlockedWeapons) {
+            if (uw.getClass() == w.getClass()) return;
+        }
+        unlockedWeapons.add(w);
+    }
+
+    public void equipWeaponIndex(int idx) {
+        if (idx >= 0 && idx < unlockedWeapons.size()) {
+            currentWeapon = unlockedWeapons.get(idx);
+        }
     }
 
     public void gainXP(int gainedXp) {
