@@ -25,6 +25,7 @@ public class GamePanel extends JPanel implements Runnable {
     // System
     Thread gameThread;
     KeyHandler keyH = new KeyHandler(this);
+    public MouseHandler mouseH = new MouseHandler(this);
     public CollisionChecker cChecker = new CollisionChecker(this);
     public UI ui = new UI(this);
     public UpgradeSystem upgradeSystem = new UpgradeSystem(this);
@@ -34,9 +35,12 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public List<Enemy> enemies = new ArrayList<>();
     public List<Projectile> projectiles = new ArrayList<>();
-    // NEW: enemy projectiles list
+    // Enemy projectiles
     public List<EnemyProjectile> enemyProjectiles = new ArrayList<>();
-    // Aliases for compatibility with older or mismatched references
+    // Melee hitboxes
+    public List<MeleeHitbox> meleeHitboxes = new ArrayList<>();
+
+    // Aliases for compatibility
     public List<EnemyProjectile> enemyprojectiles = enemyProjectiles; // lower-case p alias
     public List<Projectile> Projectiles = projectiles;               // capital P alias
     public List<Projectile> playerProjectiles = projectiles;         // alternative naming
@@ -50,6 +54,8 @@ public class GamePanel extends JPanel implements Runnable {
         this.setBackground(Color.BLACK);
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
+        this.addMouseListener(mouseH);
+        this.addMouseMotionListener(mouseH);
         this.setFocusable(true);
         this.gameState = GameState.PLAY;
     }
@@ -95,7 +101,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            // Update enemy projectiles (NEW)
+            // Update enemy projectiles
             Iterator<EnemyProjectile> epIterator = enemyProjectiles.iterator();
             while (epIterator.hasNext()) {
                 EnemyProjectile ep = epIterator.next();
@@ -118,7 +124,7 @@ public class GamePanel extends JPanel implements Runnable {
                 }
             }
 
-            // All collisions (player <-> enemy bullets, player bullets <-> enemies, explosions, pierce)
+            // Collisions: contact, melee, bullets
             cChecker.checkCollisions();
 
         } else if (gameState == GameState.LEVEL_UP) {
@@ -148,9 +154,14 @@ public class GamePanel extends JPanel implements Runnable {
             p.draw(g2);
         }
 
-        // Draw Enemy Projectiles (NEW)
+        // Draw Enemy Projectiles
         for (EnemyProjectile ep : enemyProjectiles) {
             ep.draw(g2);
+        }
+
+        // Draw Melee Hitboxes
+        for (MeleeHitbox hb : meleeHitboxes) {
+            hb.draw(g2);
         }
 
         // Draw UI
@@ -163,12 +174,9 @@ public class GamePanel extends JPanel implements Runnable {
         player.setDefaultValues();
         enemies.clear();
         projectiles.clear();
-        enemyProjectiles.clear(); // NEW
+        enemyProjectiles.clear();
+        meleeHitboxes.clear();
         waveManager.reset();
         gameState = GameState.PLAY;
     }
-
-    // Optional getters for code that prefers method access
-    public List<Projectile> getProjectiles() { return projectiles; }
-    public List<EnemyProjectile> getEnemyProjectiles() { return enemyProjectiles; }
 }

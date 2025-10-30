@@ -18,10 +18,22 @@ public class UpgradeSystem {
 
     private void initUpgrades() {
         availableUpgrades = new ArrayList<>();
+        // Core stats
         availableUpgrades.add(new Upgrade("Max HP +20", "HP_UP"));
         availableUpgrades.add(new Upgrade("Speed +1", "SPEED_UP"));
-        availableUpgrades.add(new Upgrade("Unlock Shotgun", "WEAPON_SHOTGUN"));
         availableUpgrades.add(new Upgrade("Faster Shooting", "FIRERATE_UP"));
+
+        // Ranged weapon unlocks
+        availableUpgrades.add(new Upgrade("Unlock Shotgun", "WEAPON_SHOTGUN"));
+        availableUpgrades.add(new Upgrade("Unlock Machine Gun", "WEAPON_MACHINEGUN"));
+        availableUpgrades.add(new Upgrade("Unlock Sniper", "WEAPON_SNIPER"));
+        availableUpgrades.add(new Upgrade("Unlock Rocket Launcher", "WEAPON_ROCKET"));
+        availableUpgrades.add(new Upgrade("Unlock Laser Beam", "WEAPON_LASER"));
+
+        // Melee weapon unlocks
+        availableUpgrades.add(new Upgrade("Unlock Spear (melee)", "WEAPON_SPEAR"));
+        availableUpgrades.add(new Upgrade("Unlock Sword (melee)", "WEAPON_SWORD"));
+        availableUpgrades.add(new Upgrade("Unlock Axe (melee)", "WEAPON_AXE"));
     }
 
     public void generateUpgrades() {
@@ -42,6 +54,10 @@ public class UpgradeSystem {
         }
     }
 
+    private void removeFromPool(String id) {
+        availableUpgrades.removeIf(u -> u.id.equals(id));
+    }
+
     private void applyUpgrade(Upgrade upgrade) {
         switch (upgrade.id) {
             case "HP_UP":
@@ -51,13 +67,44 @@ public class UpgradeSystem {
             case "SPEED_UP":
                 gp.player.speed += 1;
                 break;
-            case "WEAPON_SHOTGUN":
-                gp.player.currentWeapon = new Shotgun(gp);
-                // Remove this upgrade from the pool so it's not offered again
-                availableUpgrades.removeIf(u -> u.id.equals("WEAPON_SHOTGUN"));
-                break;
             case "FIRERATE_UP":
                 gp.player.currentWeapon.fireRate = Math.max(5, gp.player.currentWeapon.fireRate - 5);
+                break;
+
+            // Ranged weapons
+            case "WEAPON_SHOTGUN":
+                gp.player.currentWeapon = new Shotgun(gp);
+                removeFromPool("WEAPON_SHOTGUN");
+                break;
+            case "WEAPON_MACHINEGUN":
+                gp.player.currentWeapon = new MachineGun(gp);
+                removeFromPool("WEAPON_MACHINEGUN");
+                break;
+            case "WEAPON_SNIPER":
+                gp.player.currentWeapon = new Sniper(gp);
+                removeFromPool("WEAPON_SNIPER");
+                break;
+            case "WEAPON_ROCKET":
+                gp.player.currentWeapon = new RocketLauncher(gp);
+                removeFromPool("WEAPON_ROCKET");
+                break;
+            case "WEAPON_LASER":
+                gp.player.currentWeapon = new LaserBeam(gp);
+                removeFromPool("WEAPON_LASER");
+                break;
+
+            // Melee weapons
+            case "WEAPON_SPEAR":
+                gp.player.currentWeapon = new Spear(gp);
+                removeFromPool("WEAPON_SPEAR");
+                break;
+            case "WEAPON_SWORD":
+                gp.player.currentWeapon = new Sword(gp);
+                removeFromPool("WEAPON_SWORD");
+                break;
+            case "WEAPON_AXE":
+                gp.player.currentWeapon = new Axe(gp);
+                removeFromPool("WEAPON_AXE");
                 break;
         }
     }

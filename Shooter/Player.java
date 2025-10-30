@@ -1,4 +1,3 @@
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -13,6 +12,9 @@ public class Player extends Entity {
     public int xp;
     public int nextLevelXp;
     public Weapon currentWeapon;
+
+    // Simple cooldown to rate-limit contact damage
+    private int contactDamageCooldown = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -31,6 +33,7 @@ public class Player extends Entity {
         xp = 0;
         nextLevelXp = 10;
         currentWeapon = new Pistol(gp);
+        contactDamageCooldown = 0;
         alive = true;
     }
 
@@ -63,8 +66,21 @@ public class Player extends Entity {
         x = Math.max(0, Math.min(x, gp.screenWidth - gp.tileSize));
         y = Math.max(0, Math.min(y, gp.screenHeight - gp.tileSize));
 
-        // Shooting
+        // Shooting or swinging
         currentWeapon.update();
+
+        // Tick down contact damage cooldown
+        if (contactDamageCooldown > 0) {
+            contactDamageCooldown--;
+        }
+    }
+
+    // Called by CollisionChecker when touching enemies
+    public void takeContactDamage(int damage) {
+        if (contactDamageCooldown == 0) {
+            takeDamage(damage);
+            contactDamageCooldown = 20; // ~0.33s at 60 FPS
+        }
     }
 
     @Override

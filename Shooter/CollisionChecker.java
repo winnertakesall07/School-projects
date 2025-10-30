@@ -9,8 +9,35 @@ public class CollisionChecker {
     }
 
     public void checkCollisions() {
+        handlePlayerVsEnemiesTouch();
         handlePlayerVsEnemyProjectiles();
+        handleMeleeHitboxesVsEnemies();
         handleProjectilesVsEnemies();
+    }
+
+    // Contact damage when touching enemies
+    private void handlePlayerVsEnemiesTouch() {
+        Rectangle playerRect = new Rectangle(
+                gp.player.x + gp.player.solidArea.x,
+                gp.player.y + gp.player.solidArea.y,
+                gp.player.solidArea.width,
+                gp.player.solidArea.height
+        );
+
+        for (Enemy e : gp.enemies) {
+            if (!e.isAlive()) continue;
+
+            Rectangle enemyRect = new Rectangle(
+                    e.x + e.solidArea.x,
+                    e.y + e.solidArea.y,
+                    e.solidArea.width,
+                    e.solidArea.height
+            );
+
+            if (playerRect.intersects(enemyRect)) {
+                gp.player.takeContactDamage(5);
+            }
+        }
     }
 
     private void handlePlayerVsEnemyProjectiles() {
@@ -33,6 +60,24 @@ public class CollisionChecker {
             if (projRect.intersects(playerRect)) {
                 gp.player.takeDamage(ep.getDamage());
                 it.remove();
+            }
+        }
+    }
+
+    private void handleMeleeHitboxesVsEnemies() {
+        Iterator<MeleeHitbox> hitIt = gp.meleeHitboxes.iterator();
+        while (hitIt.hasNext()) {
+            MeleeHitbox hb = hitIt.next();
+
+            for (Enemy e : gp.enemies) {
+                if (!e.isAlive()) continue;
+                hb.tryDamage(e);
+            }
+
+            if (hb.isAlive()) {
+                hb.update();
+            } else {
+                hitIt.remove();
             }
         }
     }
