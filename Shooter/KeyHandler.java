@@ -19,6 +19,45 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         
+        // Toggle inventory (pause) with I or Tab
+        if (code == KeyEvent.VK_I || code == KeyEvent.VK_TAB) {
+            if (gp.gameState == GamePanel.GameState.PLAY) {
+                gp.gameState = GamePanel.GameState.INVENTORY;
+                if (gp.player.unlockedWeapons.isEmpty()) {
+                    gp.inventorySelectedIndex = 0;
+                } else if (gp.inventorySelectedIndex >= gp.player.unlockedWeapons.size()) {
+                    gp.inventorySelectedIndex = 0;
+                }
+            } else if (gp.gameState == GamePanel.GameState.INVENTORY) {
+                gp.gameState = GamePanel.GameState.PLAY;
+            }
+            return;
+        }
+
+        // When inventory open: navigate/equip
+        if (gp.gameState == GamePanel.GameState.INVENTORY) {
+            if (code == KeyEvent.VK_ESCAPE) {
+                gp.gameState = GamePanel.GameState.PLAY;
+                return;
+            }
+            if (code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
+                if (!gp.player.unlockedWeapons.isEmpty()) {
+                    gp.inventorySelectedIndex = (gp.inventorySelectedIndex - 1 + gp.player.unlockedWeapons.size()) % gp.player.unlockedWeapons.size();
+                }
+                return;
+            }
+            if (code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+                if (!gp.player.unlockedWeapons.isEmpty()) {
+                    gp.inventorySelectedIndex = (gp.inventorySelectedIndex + 1) % gp.player.unlockedWeapons.size();
+                }
+                return;
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                gp.player.equipWeaponIndex(gp.inventorySelectedIndex);
+                return;
+            }
+        }
+
         // Player Movement
         if (code == KeyEvent.VK_W) upPressed = true;
         if (code == KeyEvent.VK_S) downPressed = true;
