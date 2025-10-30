@@ -15,6 +15,13 @@ public class Player extends Entity {
 
     // Simple cooldown to rate-limit contact damage
     private int contactDamageCooldown = 0;
+    
+    // Player status effect timers
+    private int poisonTimer = 0;
+    private int poisonTick = 0;
+    private int slowTimer = 0;
+    private int freezeTimer = 0;
+    private int confusionTimer = 0;
 
     // Inventory data
     public List<Weapon> unlockedWeapons = new ArrayList<>();
@@ -44,6 +51,11 @@ public class Player extends Entity {
         currentWeapon = unlockedWeapons.get(0);
 
         contactDamageCooldown = 0;
+        poisonTimer = 0;
+        poisonTick = 0;
+        slowTimer = 0;
+        freezeTimer = 0;
+        confusionTimer = 0;
         alive = true;
     }
 
@@ -79,11 +91,27 @@ public class Player extends Entity {
 
     @Override
     public void update() {
+        // Update status effects
+        updateStatusEffects();
+        
+        // Don't move if frozen
+        if (freezeTimer > 0) {
+            // Still allow weapon to fire
+            currentWeapon.update();
+            return;
+        }
+        
+        // Calculate effective speed
+        int effectiveSpeed = speed;
+        if (slowTimer > 0) {
+            effectiveSpeed = speed / 2;
+        }
+        
         // Movement
-        if (keyH.upPressed) y -= speed;
-        if (keyH.downPressed) y += speed;
-        if (keyH.leftPressed) x -= speed;
-        if (keyH.rightPressed) x += speed;
+        if (keyH.upPressed) y -= effectiveSpeed;
+        if (keyH.downPressed) y += effectiveSpeed;
+        if (keyH.leftPressed) x -= effectiveSpeed;
+        if (keyH.rightPressed) x += effectiveSpeed;
 
         // Keep player within bounds
         x = Math.max(0, Math.min(x, gp.screenWidth - gp.tileSize));
@@ -118,6 +146,51 @@ public class Player extends Entity {
         if (hp <= 0) {
             alive = false;
             gp.gameState = GamePanel.GameState.GAME_OVER;
+        }
+    }
+    
+    private void updateStatusEffects() {
+        // Poison: periodic damage
+        if (poisonTimer > 0) {
+            poisonTimer--;
+            poisonTick++;
+            if (poisonTick >= 60) { // Every 1 second
+                takeDamage(1);
+                poisonTick = 0;
+            }
+        }
+        
+        // Freeze: countdown
+        if (freezeTimer > 0) freezeTimer--;
+        
+        // Slow: countdown
+        if (slowTimer > 0) slowTimer--;
+        
+        // Confusion: countdown (affects movement jitter if we implement it)
+        if (confusionTimer > 0) confusionTimer--;
+    }
+    
+    public void applyStatusEffect(StatusEffect effect, int duration) {
+        switch (effect) {
+            case POISON:
+                poisonTimer = duration;
+                poisonTick = 0;
+                break;
+            case FREEZE:
+                freezeTimer = Math.min(duration, 120); // Max 2 seconds
+                break;
+            case SLOW:
+                slowTimer = duration;
+                break;
+            case CONFUSION:
+                confusionTimer = duration;
+                break;
+            case FIRE:
+            case WEAKNESS:
+            case NONE:
+            default:
+                // Fire and weakness don't affect player
+                break;
         }
     }
 }

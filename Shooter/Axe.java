@@ -2,7 +2,7 @@ public class Axe extends MeleeWeapon {
 
     public Axe(GamePanel gp) {
         super(gp);
-        damage = 20;
+        damage = 35;  // Buffed from 20 to 35
         fireRate = 24; // relatively quick spin
     }
 
@@ -15,6 +15,8 @@ public class Axe extends MeleeWeapon {
         int radius = gp.tileSize; // around the player
         int lifetime = 12;
 
-        gp.meleeHitboxes.add(MeleeHitbox.circle(pcx, pcy, radius, damage, lifetime));
+        MeleeHitbox hb = MeleeHitbox.circle(pcx, pcy, radius, damage, lifetime);
+        hb.setStatusEffect(appliedEffect);
+        gp.meleeHitboxes.add(hb);
     }
 }

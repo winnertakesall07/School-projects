@@ -19,6 +19,15 @@ public class KeyHandler implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
         
+        // Start screen: pressing Enter starts the game
+        if (gp.gameState == GamePanel.GameState.START) {
+            if (code == KeyEvent.VK_ENTER) {
+                gp.resetGame();
+                gp.gameState = GamePanel.GameState.PLAY;
+            }
+            return;
+        }
+        
         // Toggle inventory (pause) with I or Tab
         if (code == KeyEvent.VK_I || code == KeyEvent.VK_TAB) {
             if (gp.gameState == GamePanel.GameState.PLAY) {

@@ -9,6 +9,7 @@ public class Projectile extends Entity {
     private int pierce = 0;
     private int pierceCount = 0;
     private int explosionRadius = 0;
+    private StatusEffect statusEffect = StatusEffect.NONE;
     
     public Projectile(int x, int y, int dx, int dy, int damage, int speed, GamePanel gp) {
         this.x = x;
@@ -86,5 +87,13 @@ public class Projectile extends Entity {
     
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+
+    public StatusEffect getStatusEffect() {
+        return statusEffect;
+    }
+
+    public void setStatusEffect(StatusEffect effect) {
+        this.statusEffect = effect;
     }
 }

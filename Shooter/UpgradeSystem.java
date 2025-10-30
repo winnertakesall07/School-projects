@@ -34,6 +34,14 @@ public class UpgradeSystem {
         availableUpgrades.add(new Upgrade("Unlock Spear (melee)", "WEAPON_SPEAR"));
         availableUpgrades.add(new Upgrade("Unlock Sword (melee)", "WEAPON_SWORD"));
         availableUpgrades.add(new Upgrade("Unlock Axe (melee)", "WEAPON_AXE"));
+        
+        // Status effect upgrades (apply to current weapon only)
+        availableUpgrades.add(new Upgrade("Add FIRE effect to current weapon", "EFFECT_FIRE"));
+        availableUpgrades.add(new Upgrade("Add FREEZE effect to current weapon", "EFFECT_FREEZE"));
+        availableUpgrades.add(new Upgrade("Add POISON effect to current weapon", "EFFECT_POISON"));
+        availableUpgrades.add(new Upgrade("Add SLOW effect to current weapon", "EFFECT_SLOW"));
+        availableUpgrades.add(new Upgrade("Add WEAKNESS effect to current weapon", "EFFECT_WEAKNESS"));
+        availableUpgrades.add(new Upgrade("Add CONFUSION effect to current weapon", "EFFECT_CONFUSION"));
     }
 
     public void generateUpgrades() {
@@ -145,6 +153,44 @@ public class UpgradeSystem {
                 record(upgrade.description);
                 break;
             }
+            
+            // Status effect upgrades
+            case "EFFECT_FIRE":
+                if (gp.player.currentWeapon.tryApplyEffect(StatusEffect.FIRE)) {
+                    record("Fire effect added to " + gp.player.currentWeapon.getName());
+                    removeFromPool("EFFECT_FIRE");
+                }
+                break;
+            case "EFFECT_FREEZE":
+                if (gp.player.currentWeapon.tryApplyEffect(StatusEffect.FREEZE)) {
+                    record("Freeze effect added to " + gp.player.currentWeapon.getName());
+                    removeFromPool("EFFECT_FREEZE");
+                }
+                break;
+            case "EFFECT_POISON":
+                if (gp.player.currentWeapon.tryApplyEffect(StatusEffect.POISON)) {
+                    record("Poison effect added to " + gp.player.currentWeapon.getName());
+                    removeFromPool("EFFECT_POISON");
+                }
+                break;
+            case "EFFECT_SLOW":
+                if (gp.player.currentWeapon.tryApplyEffect(StatusEffect.SLOW)) {
+                    record("Slow effect added to " + gp.player.currentWeapon.getName());
+                    removeFromPool("EFFECT_SLOW");
+                }
+                break;
+            case "EFFECT_WEAKNESS":
+                if (gp.player.currentWeapon.tryApplyEffect(StatusEffect.WEAKNESS)) {
+                    record("Weakness effect added to " + gp.player.currentWeapon.getName());
+                    removeFromPool("EFFECT_WEAKNESS");
+                }
+                break;
+            case "EFFECT_CONFUSION":
+                if (gp.player.currentWeapon.tryApplyEffect(StatusEffect.CONFUSION)) {
+                    record("Confusion effect added to " + gp.player.currentWeapon.getName());
+                    removeFromPool("EFFECT_CONFUSION");
+                }
+                break;
         }
     }
 
