@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow; // 576
 
     // Game State
-    public enum GameState { PLAY, PAUSE, LEVEL_UP, GAME_OVER }
+    public enum GameState { PLAY, PAUSE, LEVEL_UP, GAME_OVER, INVENTORY }
     public GameState gameState;
 
     // System
@@ -46,6 +46,9 @@ public class GamePanel extends JPanel implements Runnable {
     public List<Projectile> playerProjectiles = projectiles;         // alternative naming
     public List<Projectile> bullets = projectiles;                   // alternative naming
     public List<EnemyProjectile> enemyBullets = enemyProjectiles;    // alternative naming
+
+    // Inventory menu selection
+    public int inventorySelectedIndex = 0;
 
     int FPS = 60;
 
@@ -134,6 +137,8 @@ public class GamePanel extends JPanel implements Runnable {
                 gameState = GameState.PLAY;
                 keyH.enterPressed = false; // Consume the press
             }
+        } else if (gameState == GameState.INVENTORY) {
+            // Paused; input handled in KeyHandler; no world updates
         }
     }
 
