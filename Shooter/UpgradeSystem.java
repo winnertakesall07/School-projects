@@ -58,54 +58,93 @@ public class UpgradeSystem {
         availableUpgrades.removeIf(u -> u.id.equals(id));
     }
 
+    private void record(String description) {
+        gp.player.acquiredUpgrades.add(description);
+    }
+
     private void applyUpgrade(Upgrade upgrade) {
         switch (upgrade.id) {
             case "HP_UP":
                 gp.player.maxHp += 20;
                 gp.player.hp = gp.player.maxHp; // Heal to full
+                record(upgrade.description);
                 break;
             case "SPEED_UP":
                 gp.player.speed += 1;
+                record(upgrade.description);
                 break;
             case "FIRERATE_UP":
                 gp.player.currentWeapon.fireRate = Math.max(5, gp.player.currentWeapon.fireRate - 5);
+                record(upgrade.description);
                 break;
 
             // Ranged weapons
-            case "WEAPON_SHOTGUN":
-                gp.player.currentWeapon = new Shotgun(gp);
+            case "WEAPON_SHOTGUN": {
+                Weapon w = new Shotgun(gp);
+                gp.player.addWeaponIfNew(w);
+                gp.player.currentWeapon = w;
                 removeFromPool("WEAPON_SHOTGUN");
+                record(upgrade.description);
                 break;
-            case "WEAPON_MACHINEGUN":
-                gp.player.currentWeapon = new MachineGun(gp);
+            }
+            case "WEAPON_MACHINEGUN": {
+                Weapon w = new MachineGun(gp);
+                gp.player.addWeaponIfNew(w);
+                gp.player.currentWeapon = w;
                 removeFromPool("WEAPON_MACHINEGUN");
+                record(upgrade.description);
                 break;
-            case "WEAPON_SNIPER":
-                gp.player.currentWeapon = new Sniper(gp);
+            }
+            case "WEAPON_SNIPER": {
+                Weapon w = new Sniper(gp);
+                gp.player.addWeaponIfNew(w);
+                gp.player.currentWeapon = w;
                 removeFromPool("WEAPON_SNIPER");
+                record(upgrade.description);
                 break;
-            case "WEAPON_ROCKET":
-                gp.player.currentWeapon = new RocketLauncher(gp);
+            }
+            case "WEAPON_ROCKET": {
+                Weapon w = new RocketLauncher(gp);
+                gp.player.addWeaponIfNew(w);
+                gp.player.currentWeapon = w;
                 removeFromPool("WEAPON_ROCKET");
+                record(upgrade.description);
                 break;
-            case "WEAPON_LASER":
-                gp.player.currentWeapon = new LaserBeam(gp);
+            }
+            case "WEAPON_LASER": {
+                Weapon w = new LaserBeam(gp);
+                gp.player.addWeaponIfNew(w);
+                gp.player.currentWeapon = w;
                 removeFromPool("WEAPON_LASER");
+                record(upgrade.description);
                 break;
+            }
 
             // Melee weapons
-            case "WEAPON_SPEAR":
-                gp.player.currentWeapon = new Spear(gp);
+            case "WEAPON_SPEAR": {
+                Weapon w = new Spear(gp);
+                gp.player.addWeaponIfNew(w);
+                gp.player.currentWeapon = w;
                 removeFromPool("WEAPON_SPEAR");
+                record(upgrade.description);
                 break;
-            case "WEAPON_SWORD":
-                gp.player.currentWeapon = new Sword(gp);
+            }
+            case "WEAPON_SWORD": {
+                Weapon w = new Sword(gp);
+                gp.player.addWeaponIfNew(w);
+                gp.player.currentWeapon = w;
                 removeFromPool("WEAPON_SWORD");
+                record(upgrade.description);
                 break;
-            case "WEAPON_AXE":
-                gp.player.currentWeapon = new Axe(gp);
+            }
+            case "WEAPON_AXE": {
+                Weapon w = new Axe(gp);
+                gp.player.addWeaponIfNew(w);
+                gp.player.currentWeapon = w;
                 removeFromPool("WEAPON_AXE");
+                record(upgrade.description);
                 break;
+            }
         }
     }
 
