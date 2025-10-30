@@ -1,8 +1,8 @@
 public class MachineGun extends Weapon {
     public MachineGun(GamePanel gp) {
         super(gp);
-        damage = 8;
-        fireRate = 5; // Very fast - shoots every 5 frames
+        damage = 5;  // Nerfed from 8 to 5
+        fireRate = 8; // Nerfed from 5 to 8
     }
     
     @Override
@@ -11,6 +11,7 @@ public class MachineGun extends Weapon {
         int startY = gp.player.y + gp.tileSize / 2;
         Projectile proj = new Projectile(startX, startY, dx, dy, damage, 12, gp);
         proj.setColor(new java.awt.Color(255, 150, 0));
+        proj.setStatusEffect(appliedEffect);
         gp.projectiles.add(proj);
         fireCooldown = fireRate;
     }

@@ -111,6 +111,9 @@ public class UI {
             boolean selected = (i == gp.inventorySelectedIndex);
             g2.setColor(selected ? Color.CYAN : Color.LIGHT_GRAY);
             String line = w.getName() + " (DMG " + w.getDamage() + ")";
+            if (w.getAppliedEffect() != StatusEffect.NONE) {
+                line += " [" + w.getAppliedEffect().toString() + "]";
+            }
             g2.drawString(line, 80, listY + i * 26);
         }
 

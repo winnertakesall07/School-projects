@@ -11,6 +11,7 @@ public class MeleeHitbox extends Entity {
     private Type type;
     private int lifetime; // frames remaining
     private int damage;
+    private StatusEffect statusEffect = StatusEffect.NONE;
 
     // Rect params
     private int rx, ry, rwidth, rheight;
@@ -52,6 +53,9 @@ public class MeleeHitbox extends Entity {
         if (hitEnemies.contains(e)) return false;
         if (collides(e)) {
             e.takeDamage(damage);
+            if (statusEffect != StatusEffect.NONE) {
+                e.applyStatusEffect(statusEffect, 180); // 3 seconds at 60 FPS
+            }
             hitEnemies.add(e);
             return true;
         }
@@ -94,5 +98,13 @@ public class MeleeHitbox extends Entity {
         } else {
             g2.fillOval(cx - radius, cy - radius, radius * 2, radius * 2);
         }
+    }
+
+    public void setStatusEffect(StatusEffect effect) {
+        this.statusEffect = effect;
+    }
+
+    public StatusEffect getStatusEffect() {
+        return statusEffect;
     }
 }
