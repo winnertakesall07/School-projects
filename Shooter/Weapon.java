@@ -1,4 +1,3 @@
-
 public abstract class Weapon {
     protected GamePanel gp;
     protected int damage;
@@ -33,4 +32,13 @@ public abstract class Weapon {
     }
 
     protected abstract void shoot(int dx, int dy);
+
+    // New: for UI display
+    public int getDamage() {
+        return damage;
+    }
+
+    public String getName() {
+        return getClass().getSimpleName();
+    }
 }
