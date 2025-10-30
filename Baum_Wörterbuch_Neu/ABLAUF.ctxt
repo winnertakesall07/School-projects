@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=ABLAUF
+comment1.params=
+comment1.target=ABLAUF()
+comment2.params=wortE\ bedeutungE
+comment2.target=void\ einfuegen(java.lang.String,\ java.lang.String)
+comment3.params=
+comment3.target=void\ datenAusgeben()
+comment4.params=
+comment4.target=void\ preorder()
+comment5.params=
+comment5.target=void\ postorder()
+comment6.params=wortE
+comment6.target=void\ suchen(java.lang.String)
+comment7.params=
+comment7.target=int\ anzahlKnoten()
+numComments=8

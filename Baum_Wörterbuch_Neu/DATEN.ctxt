@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=DATEN
+comment1.params=wortNeu\ bedeutungNeu
+comment1.target=DATEN(java.lang.String,\ java.lang.String)
+comment1.text=\r\n\ Konstruktor\ f\u00FCr\ Objekte\ der\ Klasse\ Woerterbucheintrag\r\n\ @param\ wortNeu\ das\ englische\ Wort.\r\n\ @param\ bedeutungNeu\ die\ deutsche(n)\ Bedeutung(en).\r\n
+comment2.params=
+comment2.target=void\ datenAusgeben()
+comment2.text=\r\n\ Gibt\ Information\ \u00FCber\ das\ Datenelement\ zu\ Kontrollzwecken\r\n\ auf\ das\ Terminalfenster\ aus.\r\n
+comment3.params=dvergleich
+comment3.target=boolean\ istGleich(DATEN)
+comment3.text=\r\n\ Vergleicht\ zwei\ Datenelemente\ auf\ Gleichheit.\r\n\ @param\ dvergleich\ Datenelement\ mit\ dem\ das\ Objekt\ verglichen\ wird.\r\n\ @return\ true,\ wenn\ die\ beiden\ Datenelemente\ gleichen\ Schl\u00FCssel\ haben.\r\n
+comment4.params=dvergleich
+comment4.target=boolean\ istGroesserAls(DATEN)
+comment4.text=\r\n\ Vergleicht\ zwei\ Datenelemente\ bez\u00FCglich\ der\ Ordnungsrelation.\r\n\ @param\ vergleichselement\ Datenelement\ mit\ dem\ das\ Objekt\ verglichen\ wird.\r\n\ @return\ true,\ wenn\ das\ aktuelle\ Element\ einen\ gr\u00F6\u00DFeren\ Schl\u00FCssel\ hat,\ als\ das\ angegebene\ Vergleichselement.\r\n
+comment5.params=
+comment5.target=java.lang.String\ Schl\u00FCsselAlsStringGeben()
+comment6.params=
+comment6.target=java.lang.String\ WortGeben()
+comment6.text=\r\n\ Geben-Methode\ zum\ Attribut\ wort\r\n\ @return\ das\ englische\ Wort\r\n
+comment7.params=
+comment7.target=java.lang.String\ BedeutungGeben()
+comment7.text=\r\n\ Geben-Methode\ zum\ Attribut\ bedeutung\r\n\ @return\ bedeutung\:\ die\ deutsche(n)\ Bedeutung(en)\ als\ eine\ Zeichenkette\r\n
+comment8.params=bedeutungNeu
+comment8.target=void\ BedeutungSetzen(java.lang.String)
+comment8.text=\r\n\ Setzen-Methode\ zum\ Attribut\ bedeutung\r\n\ @param\ bedeutungNeu\ neue\ Bedeutung\ f\u00FCr\ das\ englische\ Wort\r\n
+numComments=9

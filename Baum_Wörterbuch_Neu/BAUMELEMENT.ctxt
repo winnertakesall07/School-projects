@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=BAUMELEMENT
+comment1.params=inhaltE
+comment1.target=BAUMELEMENT\ einfuegen(DATEN)
+comment2.params=
+comment2.target=void\ datenAusgeben()
+comment3.params=
+comment3.target=int\ anzahlKnoten()
+comment4.params=
+comment4.target=void\ preorder()
+comment5.params=
+comment5.target=void\ postorder()
+comment6.params=inhaltE
+comment6.target=void\ suchen(DATEN)
+numComments=7
