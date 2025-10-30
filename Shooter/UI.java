@@ -14,7 +14,9 @@ public class UI {
     }
 
     public void draw(Graphics2D g2) {
-        if (gp.gameState == GamePanel.GameState.PLAY) {
+        if (gp.gameState == GamePanel.GameState.START) {
+            drawStartScreen(g2);
+        } else if (gp.gameState == GamePanel.GameState.PLAY) {
             drawPlayStateUI(g2);
         } else if (gp.gameState == GamePanel.GameState.LEVEL_UP) {
             drawLevelUpScreen(g2);
@@ -137,5 +139,37 @@ public class UI {
     public int getXforCenteredText(String text, Graphics2D g2) {
         int length = (int) g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         return gp.screenWidth / 2 - length / 2;
+    }
+    
+    private void drawStartScreen(Graphics2D g2) {
+        g2.setColor(Color.BLACK);
+        g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+        
+        g2.setFont(arial_80);
+        g2.setColor(Color.YELLOW);
+        String title = "SHOOTER";
+        int x = getXforCenteredText(title, g2);
+        g2.drawString(title, x, gp.screenHeight / 3);
+        
+        g2.setFont(arial_40);
+        g2.setColor(Color.WHITE);
+        String subtitle = "Roguelike Action";
+        x = getXforCenteredText(subtitle, g2);
+        g2.drawString(subtitle, x, gp.screenHeight / 3 + 80);
+        
+        g2.setFont(arial_20);
+        g2.setColor(Color.CYAN);
+        String start = "Press ENTER to Start";
+        x = getXforCenteredText(start, g2);
+        g2.drawString(start, x, gp.screenHeight * 2 / 3);
+        
+        g2.setColor(Color.LIGHT_GRAY);
+        String controls1 = "WASD to move | Arrow keys to shoot";
+        x = getXforCenteredText(controls1, g2);
+        g2.drawString(controls1, x, gp.screenHeight * 2 / 3 + 60);
+        
+        String controls2 = "Mouse click to shoot/swing | I/Tab for inventory";
+        x = getXforCenteredText(controls2, g2);
+        g2.drawString(controls2, x, gp.screenHeight * 2 / 3 + 85);
     }
 }

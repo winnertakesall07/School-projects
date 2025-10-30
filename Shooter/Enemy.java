@@ -6,16 +6,16 @@ public abstract class Enemy extends Entity {
     public int xpValue;
     
     // Status effect timers
-    private int fireTimer = 0;
-    private int fireTick = 0;
-    private int poisonTimer = 0;
-    private int poisonTick = 0;
-    private int freezeTimer = 0;
-    private int slowTimer = 0;
-    private int weaknessTimer = 0;
-    private int confusionTimer = 0;
+    protected int fireTimer = 0;
+    protected int fireTick = 0;
+    protected int poisonTimer = 0;
+    protected int poisonTick = 0;
+    protected int freezeTimer = 0;
+    protected int slowTimer = 0;
+    protected int weaknessTimer = 0;
+    protected int confusionTimer = 0;
     
-    private Random random = new Random();
+    protected Random random = new Random();
 
     public Enemy(GamePanel gp) {
         this.gp = gp;
@@ -60,7 +60,7 @@ public abstract class Enemy extends Entity {
             y += effectiveSpeed;
         }
     }    
-    private void updateStatusEffects() {
+    protected void updateStatusEffects() {
         // Fire: periodic damage
         if (fireTimer > 0) {
             fireTimer--;
