@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class ShooterEnemy extends Enemy {
     private int shootCooldown;
@@ -47,10 +48,18 @@ public class ShooterEnemy extends Enemy {
     
     @Override
     public void draw(Graphics2D g2) {
-        // Shooter enemy - green with yellow border
-        g2.setColor(new Color(200, 200, 0));
-        g2.fillRect(x - 2, y - 2, gp.tileSize + 4, gp.tileSize + 4);
-        g2.setColor(new Color(50, 200, 50));
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        // Try to load sprite
+        BufferedImage sprite = SpriteLoader.get("enemy_shooter");
+        
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
+        } else {
+            // Fallback to original rendering
+            // Shooter enemy - green with yellow border
+            g2.setColor(new Color(200, 200, 0));
+            g2.fillRect(x - 2, y - 2, gp.tileSize + 4, gp.tileSize + 4);
+            g2.setColor(new Color(50, 200, 50));
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        }
     }
 }

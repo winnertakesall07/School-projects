@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Healer extends Enemy {
     private int healCooldown = 0;
@@ -81,15 +82,29 @@ public class Healer extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        // Healer is bright green with a cross
-        g2.setColor(new Color(0, 255, 0));
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        // Try to load sprite
+        BufferedImage sprite = SpriteLoader.get("enemy_healer");
         
-        // Draw a white cross
-        g2.setColor(Color.WHITE);
-        int cx = x + gp.tileSize / 2;
-        int cy = y + gp.tileSize / 2;
-        g2.fillRect(cx - 2, cy - 8, 4, 16);
-        g2.fillRect(cx - 8, cy - 2, 16, 4);
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
+            // Draw a white cross on top
+            g2.setColor(Color.WHITE);
+            int cx = x + gp.tileSize / 2;
+            int cy = y + gp.tileSize / 2;
+            g2.fillRect(cx - 2, cy - 8, 4, 16);
+            g2.fillRect(cx - 8, cy - 2, 16, 4);
+        } else {
+            // Fallback to original rendering
+            // Healer is bright green with a cross
+            g2.setColor(new Color(0, 255, 0));
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+            
+            // Draw a white cross
+            g2.setColor(Color.WHITE);
+            int cx = x + gp.tileSize / 2;
+            int cy = y + gp.tileSize / 2;
+            g2.fillRect(cx - 2, cy - 8, 4, 16);
+            g2.fillRect(cx - 8, cy - 2, 16, 4);
+        }
     }
 }

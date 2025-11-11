@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Engineer extends Enemy {
     private int turretSpawnCooldown = 0;
@@ -63,8 +64,16 @@ public class Engineer extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        // Engineer is cyan
-        g2.setColor(new Color(0, 200, 200));
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        // Try to load sprite
+        BufferedImage sprite = SpriteLoader.get("enemy_engineer");
+        
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
+        } else {
+            // Fallback to original rendering
+            // Engineer is cyan
+            g2.setColor(new Color(0, 200, 200));
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        }
     }
 }

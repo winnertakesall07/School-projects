@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Jumper extends Enemy {
     private int jumpCooldown = 0;
@@ -48,8 +49,16 @@ public class Jumper extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        // Jumper is orange
-        g2.setColor(new Color(255, 165, 0));
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        // Try to load sprite
+        BufferedImage sprite = SpriteLoader.get("enemy_jumper");
+        
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
+        } else {
+            // Fallback to original rendering
+            // Jumper is orange
+            g2.setColor(new Color(255, 165, 0));
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        }
     }
 }
