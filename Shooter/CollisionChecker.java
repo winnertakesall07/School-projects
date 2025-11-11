@@ -35,7 +35,7 @@ public class CollisionChecker {
             );
 
             if (playerRect.intersects(enemyRect)) {
-                gp.player.takeContactDamage(5);
+                gp.player.takeContactDamage(e.getContactDamage());
             }
         }
     }
@@ -59,6 +59,10 @@ public class CollisionChecker {
             );
             if (projRect.intersects(playerRect)) {
                 gp.player.takeDamage(ep.getDamage());
+                // Apply status effect to player
+                if (ep.getStatusEffect() != StatusEffect.NONE) {
+                    gp.player.applyStatusEffect(ep.getStatusEffect(), 180);
+                }
                 it.remove();
             }
         }
@@ -107,11 +111,16 @@ public class CollisionChecker {
                 if (pRect.intersects(enemyRect)) {
                     // Direct hit
                     e.takeDamage(p.getDamage());
+                    
+                    // Apply status effect
+                    if (p.getStatusEffect() != StatusEffect.NONE) {
+                        e.applyStatusEffect(p.getStatusEffect(), 180);
+                    }
 
                     // Explosion damage (if any)
                     int radius = p.getExplosionRadius();
                     if (radius > 0) {
-                        explodeAt(p.x, p.y, radius, p.getDamage());
+                        explodeAt(p.x, p.y, radius, p.getDamage(), p.getStatusEffect());
                         p.takeDamage(99999); // destroy after explosion
                         break; // move to next projectile
                     }
@@ -129,7 +138,7 @@ public class CollisionChecker {
         }
     }
 
-    private void explodeAt(int cx, int cy, int radius, int baseDamage) {
+    private void explodeAt(int cx, int cy, int radius, int baseDamage, StatusEffect effect) {
         int r2 = radius * radius;
         for (Enemy e : gp.enemies) {
             if (!e.isAlive()) continue;
@@ -145,6 +154,9 @@ public class CollisionChecker {
             int dy = ey - cy;
             if (dx * dx + dy * dy <= r2) {
                 e.takeDamage(baseDamage);
+                if (effect != StatusEffect.NONE) {
+                    e.applyStatusEffect(effect, 180);
+                }
             }
         }
     }

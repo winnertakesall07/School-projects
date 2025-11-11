@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements Runnable {
     public final int screenHeight = tileSize * maxScreenRow; // 576
 
     // Game State
-    public enum GameState { PLAY, PAUSE, LEVEL_UP, GAME_OVER, INVENTORY }
+    public enum GameState { START, PLAY, PAUSE, LEVEL_UP, GAME_OVER, INVENTORY }
     public GameState gameState;
 
     // System
@@ -60,7 +60,7 @@ public class GamePanel extends JPanel implements Runnable {
         this.addMouseListener(mouseH);
         this.addMouseMotionListener(mouseH);
         this.setFocusable(true);
-        this.gameState = GameState.PLAY;
+        this.gameState = GameState.START;
     }
 
     public void startGameThread() {
@@ -89,7 +89,9 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if (gameState == GameState.PLAY) {
+        if (gameState == GameState.START) {
+            // No updates on start screen
+        } else if (gameState == GameState.PLAY) {
             player.update();
             waveManager.update();
 
