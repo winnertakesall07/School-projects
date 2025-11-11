@@ -75,3 +75,11 @@ The `SpriteLoader` class provides:
 - `drawScaledCentered(g2, img, cx, cy, w, h)` - Draw a sprite centered at a position
 
 Sprites are cached in a `ConcurrentHashMap` for thread-safe access and performance.
+
+## Testing
+
+The sprite system has been thoroughly tested:
+- All sprites load correctly from the assets directory
+- Missing sprites are handled gracefully without exceptions
+- Cache performance is optimized with ConcurrentHashMap
+- No runtime errors occur when assets are missing
