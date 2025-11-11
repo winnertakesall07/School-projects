@@ -11,6 +11,7 @@ public class Pistol extends Weapon {
         int startY = gp.player.y + gp.tileSize / 2;
         Projectile proj = new Projectile(startX, startY, dx, dy, damage, 10, gp);
         proj.setStatusEffect(appliedEffect);
+        proj.setSpriteKey("bullet");
         gp.projectiles.add(proj);
         fireCooldown = fireRate;
     }

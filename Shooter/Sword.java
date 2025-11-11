@@ -49,6 +49,7 @@ public class Sword extends MeleeWeapon {
 
         MeleeHitbox hb = MeleeHitbox.rect(rx, ry, rw, rh, damage, lifetime);
         hb.setStatusEffect(appliedEffect);
+        hb.setSpriteKey("melee_arc");
         gp.meleeHitboxes.add(hb);
     }
 }

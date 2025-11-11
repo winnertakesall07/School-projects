@@ -12,6 +12,7 @@ public class MachineGun extends Weapon {
         Projectile proj = new Projectile(startX, startY, dx, dy, damage, 12, gp);
         proj.setColor(new java.awt.Color(255, 150, 0));
         proj.setStatusEffect(appliedEffect);
+        proj.setSpriteKey("bullet");
         gp.projectiles.add(proj);
         fireCooldown = fireRate;
     }

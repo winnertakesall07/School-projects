@@ -49,6 +49,7 @@ public class Spear extends MeleeWeapon {
 
         MeleeHitbox hb = MeleeHitbox.rect(rx, ry, rw, rh, damage, lifetime);
         hb.setStatusEffect(appliedEffect);
+        hb.setSpriteKey("spear_thrust");
         gp.meleeHitboxes.add(hb);
     }
 }

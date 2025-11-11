@@ -12,6 +12,7 @@ public class Sniper extends Weapon {
         Projectile proj = new Projectile(startX, startY, dx, dy, damage, 15, gp);
         proj.setColor(new java.awt.Color(150, 0, 255));
         proj.setStatusEffect(appliedEffect);
+        proj.setSpriteKey("bullet");
         gp.projectiles.add(proj);
         fireCooldown = fireRate;
     }

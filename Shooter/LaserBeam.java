@@ -13,6 +13,7 @@ public class LaserBeam extends Weapon {
         proj.setColor(new java.awt.Color(0, 255, 255));
         proj.setPierce(5); // Nerfed from 999 to 5
         proj.setStatusEffect(appliedEffect);
+        proj.setSpriteKey("laser");
         gp.projectiles.add(proj);
         fireCooldown = fireRate;
     }

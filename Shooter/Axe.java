@@ -17,6 +17,7 @@ public class Axe extends MeleeWeapon {
 
         MeleeHitbox hb = MeleeHitbox.circle(pcx, pcy, radius, damage, lifetime);
         hb.setStatusEffect(appliedEffect);
+        hb.setSpriteKey("melee_arc");
         gp.meleeHitboxes.add(hb);
     }
 }
