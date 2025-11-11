@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.HashSet;
+import java.util.Set;
 import javax.imageio.ImageIO;
 
 /**
@@ -13,6 +15,7 @@ import javax.imageio.ImageIO;
 public class SpriteLoader {
     private static final String ASSETS_DIR = "assets/";
     private static final ConcurrentHashMap<String, BufferedImage> cache = new ConcurrentHashMap<>();
+    private static final Set<String> missingSprites = new HashSet<>();
     
     /**
      * Get a sprite by key. Returns null if not found (graceful fallback).
@@ -21,6 +24,11 @@ public class SpriteLoader {
      */
     public static BufferedImage get(String key) {
         if (key == null) return null;
+        
+        // Check if we already know this sprite is missing
+        if (missingSprites.contains(key)) {
+            return null;
+        }
         
         // Check cache first
         if (cache.containsKey(key)) {
@@ -32,8 +40,8 @@ public class SpriteLoader {
         File file = new File(filename);
         
         if (!file.exists()) {
-            // Graceful fallback: cache null to avoid repeated file checks
-            cache.put(key, null);
+            // Graceful fallback: remember this sprite is missing
+            missingSprites.add(key);
             return null;
         }
         
@@ -43,7 +51,7 @@ public class SpriteLoader {
             return img;
         } catch (IOException e) {
             // Graceful fallback
-            cache.put(key, null);
+            missingSprites.add(key);
             return null;
         }
     }
@@ -82,5 +90,6 @@ public class SpriteLoader {
      */
     public static void clearCache() {
         cache.clear();
+        missingSprites.clear();
     }
 }
