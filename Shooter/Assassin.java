@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Assassin extends Enemy {
 
@@ -15,9 +16,18 @@ public class Assassin extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        // Assassin is small and purple
-        g2.setColor(new Color(128, 0, 128));
-        int size = gp.tileSize / 2; // Half size
-        g2.fillRect(x + gp.tileSize / 4, y + gp.tileSize / 4, size, size);
+        // Try to load sprite
+        BufferedImage sprite = SpriteLoader.get("enemy_assassin");
+        
+        if (sprite != null) {
+            int size = gp.tileSize / 2; // Half size
+            g2.drawImage(sprite, x + gp.tileSize / 4, y + gp.tileSize / 4, size, size, null);
+        } else {
+            // Fallback to original rendering
+            // Assassin is small and purple
+            g2.setColor(new Color(128, 0, 128));
+            int size = gp.tileSize / 2; // Half size
+            g2.fillRect(x + gp.tileSize / 4, y + gp.tileSize / 4, size, size);
+        }
     }
 }

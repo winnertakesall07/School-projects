@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Chemist extends Enemy {
     private int shootCooldown = 0;
@@ -78,8 +79,16 @@ public class Chemist extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        // Chemist is green
-        g2.setColor(new Color(0, 200, 0));
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        // Try to load sprite
+        BufferedImage sprite = SpriteLoader.get("enemy_chemist");
+        
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
+        } else {
+            // Fallback to original rendering
+            // Chemist is green
+            g2.setColor(new Color(0, 200, 0));
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        }
     }
 }

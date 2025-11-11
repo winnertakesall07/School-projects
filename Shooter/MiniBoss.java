@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class MiniBoss extends Enemy {
     private int shootCooldown = 0;
@@ -78,24 +79,48 @@ public class MiniBoss extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        // MiniBoss is large and dark red
-        g2.setColor(new Color(139, 0, 0));
-        g2.fillRect(x - gp.tileSize / 4, y - gp.tileSize / 4, (int)(gp.tileSize * 1.5), (int)(gp.tileSize * 1.5));
+        // Try to load sprite
+        BufferedImage sprite = SpriteLoader.get("enemy_miniboss");
         
-        // Draw HP bar
-        int barWidth = gp.tileSize * 2;
-        int barHeight = 6;
-        int barX = x - gp.tileSize / 4;
-        int barY = y - 20;
-        
-        g2.setColor(Color.RED);
-        g2.fillRect(barX, barY, barWidth, barHeight);
-        
-        g2.setColor(Color.GREEN);
-        int hpWidth = (int) ((double) hp / maxHp * barWidth);
-        g2.fillRect(barX, barY, hpWidth, barHeight);
-        
-        g2.setColor(Color.WHITE);
-        g2.drawRect(barX, barY, barWidth, barHeight);
+        if (sprite != null) {
+            g2.drawImage(sprite, x - gp.tileSize / 4, y - gp.tileSize / 4, (int)(gp.tileSize * 1.5), (int)(gp.tileSize * 1.5), null);
+            
+            // Draw HP bar (always show for mini boss)
+            int barWidth = gp.tileSize * 2;
+            int barHeight = 6;
+            int barX = x - gp.tileSize / 4;
+            int barY = y - 20;
+            
+            g2.setColor(Color.RED);
+            g2.fillRect(barX, barY, barWidth, barHeight);
+            
+            g2.setColor(Color.GREEN);
+            int hpWidth = (int) ((double) hp / maxHp * barWidth);
+            g2.fillRect(barX, barY, hpWidth, barHeight);
+            
+            g2.setColor(Color.WHITE);
+            g2.drawRect(barX, barY, barWidth, barHeight);
+        } else {
+            // Fallback to original rendering
+            // MiniBoss is large and dark red
+            g2.setColor(new Color(139, 0, 0));
+            g2.fillRect(x - gp.tileSize / 4, y - gp.tileSize / 4, (int)(gp.tileSize * 1.5), (int)(gp.tileSize * 1.5));
+            
+            // Draw HP bar
+            int barWidth = gp.tileSize * 2;
+            int barHeight = 6;
+            int barX = x - gp.tileSize / 4;
+            int barY = y - 20;
+            
+            g2.setColor(Color.RED);
+            g2.fillRect(barX, barY, barWidth, barHeight);
+            
+            g2.setColor(Color.GREEN);
+            int hpWidth = (int) ((double) hp / maxHp * barWidth);
+            g2.fillRect(barX, barY, hpWidth, barHeight);
+            
+            g2.setColor(Color.WHITE);
+            g2.drawRect(barX, barY, barWidth, barHeight);
+        }
     }
 }

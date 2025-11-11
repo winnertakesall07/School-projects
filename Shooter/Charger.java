@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Charger extends Enemy {
     private int restTimer = 0;
@@ -57,14 +58,22 @@ public class Charger extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        if (charging) {
-            // Bright red when charging
-            g2.setColor(new Color(255, 50, 50));
+        // Try to load sprite
+        BufferedImage sprite = SpriteLoader.get("enemy_charger");
+        
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
         } else {
-            // Dark red when resting
-            g2.setColor(new Color(150, 0, 0));
+            // Fallback to original rendering
+            if (charging) {
+                // Bright red when charging
+                g2.setColor(new Color(255, 50, 50));
+            } else {
+                // Dark red when resting
+                g2.setColor(new Color(150, 0, 0));
+            }
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
         }
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
     }
     
     @Override

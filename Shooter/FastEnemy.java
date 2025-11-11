@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class FastEnemy extends Enemy {
     
@@ -15,10 +16,18 @@ public class FastEnemy extends Enemy {
     
     @Override
     public void draw(Graphics2D g2) {
-        // Fast enemy - bright red with orange border
-        g2.setColor(new Color(255, 100, 0));
-        g2.fillRect(x - 2, y - 2, gp.tileSize + 4, gp.tileSize + 4);
-        g2.setColor(new Color(255, 50, 50));
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        // Try to load sprite
+        BufferedImage sprite = SpriteLoader.get("enemy_fast");
+        
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
+        } else {
+            // Fallback to original rendering
+            // Fast enemy - bright red with orange border
+            g2.setColor(new Color(255, 100, 0));
+            g2.fillRect(x - 2, y - 2, gp.tileSize + 4, gp.tileSize + 4);
+            g2.setColor(new Color(255, 50, 50));
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        }
     }
 }
