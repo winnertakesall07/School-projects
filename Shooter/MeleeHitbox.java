@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class MeleeHitbox extends Entity {
     private int lifetime; // frames remaining
     private int damage;
     private StatusEffect statusEffect = StatusEffect.NONE;
+    private String spriteKey = null;
 
     // Rect params
     private int rx, ry, rwidth, rheight;
@@ -47,6 +49,14 @@ public class MeleeHitbox extends Entity {
         h.damage = damage;
         h.lifetime = lifetime;
         return h;
+    }
+    
+    public void setSpriteKey(String spriteKey) {
+        this.spriteKey = spriteKey;
+    }
+    
+    public String getSpriteKey() {
+        return spriteKey;
     }
 
     public boolean tryDamage(Enemy e) {
@@ -92,6 +102,24 @@ public class MeleeHitbox extends Entity {
 
     @Override
     public void draw(Graphics2D g2) {
+        // Try to draw sprite overlay first
+        if (spriteKey != null) {
+            BufferedImage sprite = SpriteLoader.get(spriteKey);
+            if (sprite != null) {
+                if (type == Type.RECT) {
+                    // Draw sprite centered on rectangle
+                    int cx = rx + rwidth / 2;
+                    int cy = ry + rheight / 2;
+                    SpriteLoader.drawScaledCentered(g2, sprite, cx, cy, rwidth, rheight);
+                } else {
+                    // Draw sprite centered on circle
+                    SpriteLoader.drawScaledCentered(g2, sprite, cx, cy, radius * 2, radius * 2);
+                }
+                return;
+            }
+        }
+        
+        // Fallback to colored shapes
         g2.setColor(color);
         if (type == Type.RECT) {
             g2.fillRect(rx, ry, rwidth, rheight);

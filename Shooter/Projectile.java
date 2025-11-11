@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 public class Projectile extends Entity {
     int dx, dy;
@@ -10,6 +11,7 @@ public class Projectile extends Entity {
     private int pierceCount = 0;
     private int explosionRadius = 0;
     private StatusEffect statusEffect = StatusEffect.NONE;
+    private String spriteKey = null;
     
     public Projectile(int x, int y, int dx, int dy, int damage, int speed, GamePanel gp) {
         this.x = x;
@@ -23,6 +25,14 @@ public class Projectile extends Entity {
     
     public void setColor(Color color) {
         this.color = color;
+    }
+    
+    public void setSpriteKey(String spriteKey) {
+        this.spriteKey = spriteKey;
+    }
+    
+    public String getSpriteKey() {
+        return spriteKey;
     }
     
     public void setPierce(int pierce) {
@@ -72,6 +82,16 @@ public class Projectile extends Entity {
 
     @Override
     public void draw(Graphics2D g2) {
+        // Try to draw sprite first
+        if (spriteKey != null) {
+            BufferedImage sprite = SpriteLoader.get(spriteKey);
+            if (sprite != null) {
+                SpriteLoader.drawScaledCentered(g2, sprite, x, y, 12, 12);
+                return;
+            }
+        }
+        
+        // Fallback to rectangle drawing
         // Draw trail effect
         g2.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), 100));
         g2.fillRect(x - 6, y - 6, 12, 12);

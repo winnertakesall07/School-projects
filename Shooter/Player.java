@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,10 @@ public class Player extends Entity {
     private int slowTimer = 0;
     private int freezeTimer = 0;
     private int confusionTimer = 0;
+    
+    // Animation state
+    private int animationTick = 0;
+    private int animationFrame = 0;
 
     // Inventory data
     public List<Weapon> unlockedWeapons = new ArrayList<>();
@@ -107,6 +112,9 @@ public class Player extends Entity {
             effectiveSpeed = speed / 2;
         }
         
+        // Check if moving
+        boolean isMoving = keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed;
+        
         // Movement
         if (keyH.upPressed) y -= effectiveSpeed;
         if (keyH.downPressed) y += effectiveSpeed;
@@ -116,6 +124,18 @@ public class Player extends Entity {
         // Keep player within bounds
         x = Math.max(0, Math.min(x, gp.screenWidth - gp.tileSize));
         y = Math.max(0, Math.min(y, gp.screenHeight - gp.tileSize));
+
+        // Update animation if moving
+        if (isMoving) {
+            animationTick++;
+            if (animationTick >= 10) {
+                animationTick = 0;
+                animationFrame = (animationFrame == 0) ? 1 : 0;
+            }
+        } else {
+            animationTick = 0;
+            animationFrame = 0;
+        }
 
         // Shooting or swinging
         currentWeapon.update();
@@ -136,8 +156,23 @@ public class Player extends Entity {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.WHITE);
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        // Try to draw animated sprite
+        BufferedImage sprite = SpriteLoader.getFrame("player", animationFrame);
+        if (sprite == null) {
+            // Fallback to static sprite
+            sprite = SpriteLoader.get("player");
+        }
+        
+        if (sprite != null) {
+            // Draw sprite centered on player position
+            int cx = x + gp.tileSize / 2;
+            int cy = y + gp.tileSize / 2;
+            SpriteLoader.drawScaledCentered(g2, sprite, cx, cy, gp.tileSize, gp.tileSize);
+        } else {
+            // Fallback to rectangle
+            g2.setColor(Color.WHITE);
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        }
     }
     
     @Override

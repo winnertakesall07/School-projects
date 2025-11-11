@@ -13,6 +13,7 @@ public class RocketLauncher extends Weapon {
         proj.setColor(new java.awt.Color(255, 0, 0));
         proj.setExplosionRadius(80);
         proj.setStatusEffect(appliedEffect);
+        proj.setSpriteKey("rocket");
         gp.projectiles.add(proj);
         fireCooldown = fireRate;
     }
