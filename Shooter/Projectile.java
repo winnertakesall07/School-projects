@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 public class Projectile extends Entity {
     int dx, dy;
@@ -10,6 +11,7 @@ public class Projectile extends Entity {
     private int pierceCount = 0;
     private int explosionRadius = 0;
     private StatusEffect statusEffect = StatusEffect.NONE;
+    private String spriteKey = "bullet"; // Default sprite key
     
     public Projectile(int x, int y, int dx, int dy, int damage, int speed, GamePanel gp) {
         this.x = x;
@@ -23,6 +25,16 @@ public class Projectile extends Entity {
     
     public void setColor(Color color) {
         this.color = color;
+        // Infer sprite key from color if not set explicitly
+        if (color.equals(new Color(0, 255, 255))) {
+            spriteKey = "laser";
+        } else if (color.equals(new Color(255, 100, 0)) || color.equals(Color.ORANGE)) {
+            spriteKey = "rocket";
+        }
+    }
+    
+    public void setSpriteKey(String key) {
+        this.spriteKey = key;
     }
     
     public void setPierce(int pierce) {
@@ -72,13 +84,25 @@ public class Projectile extends Entity {
 
     @Override
     public void draw(Graphics2D g2) {
-        // Draw trail effect
-        g2.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), 100));
-        g2.fillRect(x - 6, y - 6, 12, 12);
+        BufferedImage sprite = SpriteLoader.get(spriteKey);
         
-        // Draw main projectile
-        g2.setColor(color);
-        g2.fillRect(x - 4, y - 4, 8, 8);
+        if (sprite != null) {
+            // Calculate angle for rotation
+            double angle = Math.atan2(dy, dx);
+            
+            // Draw sprite with rotation
+            int size = 16;
+            GraphicsUtil.drawSpriteRotated(g2, sprite, x - size/2, y - size/2, size, size, angle);
+        } else {
+            // Fallback to rectangle drawing
+            // Draw trail effect
+            g2.setColor(new Color(color.getRed(), color.getGreen(), color.getBlue(), 100));
+            g2.fillRect(x - 6, y - 6, 12, 12);
+            
+            // Draw main projectile
+            g2.setColor(color);
+            g2.fillRect(x - 4, y - 4, 8, 8);
+        }
     }
     
     public int getDamage() {

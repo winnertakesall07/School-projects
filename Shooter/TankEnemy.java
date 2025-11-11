@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class TankEnemy extends Enemy {
     
@@ -15,20 +16,36 @@ public class TankEnemy extends Enemy {
     
     @Override
     public void draw(Graphics2D g2) {
-        // Tank enemy - large gray with dark border
-        int size = gp.tileSize + 10;
-        g2.setColor(new Color(40, 40, 40));
-        g2.fillRect(x - 7, y - 7, size + 4, size + 4);
-        g2.setColor(new Color(120, 120, 120));
-        g2.fillRect(x - 5, y - 5, size, size);
-        
-        // HP bar
-        int barWidth = size;
-        int barHeight = 5;
-        g2.setColor(Color.RED);
-        g2.fillRect(x - 5, y - 12, barWidth, barHeight);
-        g2.setColor(Color.GREEN);
-        int currentBarWidth = (int)((double)hp / maxHp * barWidth);
-        g2.fillRect(x - 5, y - 12, currentBarWidth, barHeight);
+        BufferedImage sprite = SpriteLoader.get("enemy_tank");
+        if (sprite != null) {
+            // Tank is larger
+            int size = gp.tileSize + 10;
+            g2.drawImage(sprite, x - 5, y - 5, size, size, null);
+            
+            // Draw HP bar
+            int barWidth = size;
+            int barHeight = 5;
+            g2.setColor(Color.RED);
+            g2.fillRect(x - 5, y - 12, barWidth, barHeight);
+            g2.setColor(Color.GREEN);
+            int currentBarWidth = (int)((double)hp / maxHp * barWidth);
+            g2.fillRect(x - 5, y - 12, currentBarWidth, barHeight);
+        } else {
+            // Fallback to rectangle - large gray with dark border
+            int size = gp.tileSize + 10;
+            g2.setColor(new Color(40, 40, 40));
+            g2.fillRect(x - 7, y - 7, size + 4, size + 4);
+            g2.setColor(new Color(120, 120, 120));
+            g2.fillRect(x - 5, y - 5, size, size);
+            
+            // HP bar
+            int barWidth = size;
+            int barHeight = 5;
+            g2.setColor(Color.RED);
+            g2.fillRect(x - 5, y - 12, barWidth, barHeight);
+            g2.setColor(Color.GREEN);
+            int currentBarWidth = (int)((double)hp / maxHp * barWidth);
+            g2.fillRect(x - 5, y - 12, currentBarWidth, barHeight);
+        }
     }
 }

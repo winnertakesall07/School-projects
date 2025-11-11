@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class BasicEnemy extends Enemy {
 
@@ -15,7 +16,13 @@ public class BasicEnemy extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.RED);
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        BufferedImage sprite = SpriteLoader.get("enemy_basic");
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
+        } else {
+            // Fallback to rectangle
+            g2.setColor(Color.RED);
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        }
     }
 }

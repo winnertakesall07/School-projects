@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Turret extends Enemy {
     private int shootCooldown = 0;
@@ -46,13 +47,23 @@ public class Turret extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        // Turret is dark gray and square
-        g2.setColor(new Color(64, 64, 64));
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-        // Draw a red targeting marker
-        g2.setColor(Color.RED);
-        int cx = x + gp.tileSize / 2;
-        int cy = y + gp.tileSize / 2;
-        g2.fillOval(cx - 4, cy - 4, 8, 8);
+        BufferedImage sprite = SpriteLoader.get("enemy_turret");
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
+            // Draw a red targeting marker on top
+            g2.setColor(Color.RED);
+            int cx = x + gp.tileSize / 2;
+            int cy = y + gp.tileSize / 2;
+            g2.fillOval(cx - 4, cy - 4, 8, 8);
+        } else {
+            // Fallback to rectangle - dark gray and square
+            g2.setColor(new Color(64, 64, 64));
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+            // Draw a red targeting marker
+            g2.setColor(Color.RED);
+            int cx = x + gp.tileSize / 2;
+            int cy = y + gp.tileSize / 2;
+            g2.fillOval(cx - 4, cy - 4, 8, 8);
+        }
     }
 }

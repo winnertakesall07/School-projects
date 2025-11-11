@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class MiniBoss extends Enemy {
     private int shootCooldown = 0;
@@ -78,11 +79,21 @@ public class MiniBoss extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        // MiniBoss is large and dark red
-        g2.setColor(new Color(139, 0, 0));
-        g2.fillRect(x - gp.tileSize / 4, y - gp.tileSize / 4, (int)(gp.tileSize * 1.5), (int)(gp.tileSize * 1.5));
+        BufferedImage sprite = SpriteLoader.get("enemy_miniboss");
+        int size = (int)(gp.tileSize * 1.5);
+        int offsetX = -gp.tileSize / 4;
+        int offsetY = -gp.tileSize / 4;
         
-        // Draw HP bar
+        if (sprite != null) {
+            // MiniBoss is large
+            g2.drawImage(sprite, x + offsetX, y + offsetY, size, size, null);
+        } else {
+            // Fallback to rectangle - large and dark red
+            g2.setColor(new Color(139, 0, 0));
+            g2.fillRect(x + offsetX, y + offsetY, size, size);
+        }
+        
+        // Draw HP bar (always show for miniboss)
         int barWidth = gp.tileSize * 2;
         int barHeight = 6;
         int barX = x - gp.tileSize / 4;
