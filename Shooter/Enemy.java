@@ -1,4 +1,5 @@
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public abstract class Enemy extends Entity {
@@ -16,6 +17,11 @@ public abstract class Enemy extends Entity {
     protected int confusionTimer = 0;
     
     protected Random random = new Random();
+    
+    // Animation
+    protected int animationFrame = 0;
+    protected int animationCounter = 0;
+    protected boolean hasAnimation = false;
 
     public Enemy(GamePanel gp) {
         this.gp = gp;
@@ -47,17 +53,31 @@ public abstract class Enemy extends Entity {
             targetY += random.nextInt(100) - 50;
         }
         
+        boolean isMoving = false;
         if (targetX < this.x) {
             x -= effectiveSpeed;
+            isMoving = true;
         }
         if (targetX > this.x) {
             x += effectiveSpeed;
+            isMoving = true;
         }
         if (targetY < this.y) {
             y -= effectiveSpeed;
+            isMoving = true;
         }
         if (targetY > this.y) {
             y += effectiveSpeed;
+            isMoving = true;
+        }
+        
+        // Update animation if this enemy type has animation
+        if (hasAnimation && isMoving) {
+            animationCounter++;
+            if (animationCounter >= 10) {
+                animationFrame = (animationFrame + 1) % 2;
+                animationCounter = 0;
+            }
         }
     }    
     protected void updateStatusEffects() {

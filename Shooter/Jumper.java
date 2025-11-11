@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Jumper extends Enemy {
     private int jumpCooldown = 0;
@@ -16,6 +17,7 @@ public class Jumper extends Enemy {
         hp = maxHp;
         xpValue = 7;
         jumpCooldown = 90; // Initial jump after 1.5 seconds
+        hasAnimation = true; // Enable animation
     }
 
     @Override
@@ -29,6 +31,12 @@ public class Jumper extends Enemy {
             x += jumpDx;
             y += jumpDy;
             jumpDuration--;
+            // Animate during jump
+            animationCounter++;
+            if (animationCounter >= 5) {
+                animationFrame = (animationFrame + 1) % 2;
+                animationCounter = 0;
+            }
         } else if (jumpCooldown > 0) {
             // Waiting to jump
             jumpCooldown--;
@@ -48,8 +56,18 @@ public class Jumper extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        // Jumper is orange
-        g2.setColor(new Color(255, 165, 0));
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        // Try to load animated sprite
+        BufferedImage sprite = SpriteLoader.get("enemy_jumper_" + animationFrame);
+        if (sprite == null) {
+            sprite = SpriteLoader.get("enemy_jumper");
+        }
+        
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
+        } else {
+            // Fallback to rectangle - orange
+            g2.setColor(new Color(255, 165, 0));
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        }
     }
 }

@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,10 @@ public class Player extends Entity {
     public int xp;
     public int nextLevelXp;
     public Weapon currentWeapon;
+    
+    // Animation
+    private int animationFrame = 0;
+    private int animationCounter = 0;
 
     // Simple cooldown to rate-limit contact damage
     private int contactDamageCooldown = 0;
@@ -107,6 +112,9 @@ public class Player extends Entity {
             effectiveSpeed = speed / 2;
         }
         
+        // Check if moving
+        boolean isMoving = keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed;
+        
         // Movement
         if (keyH.upPressed) y -= effectiveSpeed;
         if (keyH.downPressed) y += effectiveSpeed;
@@ -116,6 +124,18 @@ public class Player extends Entity {
         // Keep player within bounds
         x = Math.max(0, Math.min(x, gp.screenWidth - gp.tileSize));
         y = Math.max(0, Math.min(y, gp.screenHeight - gp.tileSize));
+
+        // Update animation
+        if (isMoving) {
+            animationCounter++;
+            if (animationCounter >= 10) {
+                animationFrame = (animationFrame + 1) % 2;
+                animationCounter = 0;
+            }
+        } else {
+            animationFrame = 0;
+            animationCounter = 0;
+        }
 
         // Shooting or swinging
         currentWeapon.update();
@@ -136,8 +156,21 @@ public class Player extends Entity {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.setColor(Color.WHITE);
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        // Try to load sprite with animation frame
+        BufferedImage sprite = SpriteLoader.get("player_" + animationFrame);
+        if (sprite == null) {
+            // Fallback to single player sprite
+            sprite = SpriteLoader.get("player");
+        }
+        
+        if (sprite != null) {
+            // Draw sprite
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
+        } else {
+            // Fallback to rectangle if sprite not found
+            g2.setColor(Color.WHITE);
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        }
     }
     
     @Override

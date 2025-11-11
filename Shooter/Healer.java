@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public class Healer extends Enemy {
     private int healCooldown = 0;
@@ -81,11 +82,16 @@ public class Healer extends Enemy {
 
     @Override
     public void draw(Graphics2D g2) {
-        // Healer is bright green with a cross
-        g2.setColor(new Color(0, 255, 0));
-        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        BufferedImage sprite = SpriteLoader.get("enemy_healer");
+        if (sprite != null) {
+            g2.drawImage(sprite, x, y, gp.tileSize, gp.tileSize, null);
+        } else {
+            // Fallback to rectangle - bright green with a cross
+            g2.setColor(new Color(0, 255, 0));
+            g2.fillRect(x, y, gp.tileSize, gp.tileSize);
+        }
         
-        // Draw a white cross
+        // Draw a white cross (always, even with sprite)
         g2.setColor(Color.WHITE);
         int cx = x + gp.tileSize / 2;
         int cy = y + gp.tileSize / 2;

@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class MeleeHitbox extends Entity {
     private List<Enemy> hitEnemies = new ArrayList<>();
 
     private Color color = new Color(255, 255, 255, 120);
+    private String spriteKey = "melee_arc"; // Default sprite key
 
     // Factory: rectangle hitbox
     public static MeleeHitbox rect(int x, int y, int width, int height, int damage, int lifetime) {
@@ -47,6 +49,10 @@ public class MeleeHitbox extends Entity {
         h.damage = damage;
         h.lifetime = lifetime;
         return h;
+    }
+    
+    public void setSpriteKey(String key) {
+        this.spriteKey = key;
     }
 
     public boolean tryDamage(Enemy e) {
@@ -92,11 +98,24 @@ public class MeleeHitbox extends Entity {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.setColor(color);
-        if (type == Type.RECT) {
-            g2.fillRect(rx, ry, rwidth, rheight);
+        BufferedImage sprite = SpriteLoader.get(spriteKey);
+        
+        if (sprite != null && type == Type.RECT) {
+            // Draw sprite for rectangle melee hitbox
+            g2.setColor(new Color(255, 255, 255, 150));
+            g2.drawImage(sprite, rx, ry, rwidth, rheight, null);
+        } else if (sprite != null && type == Type.CIRCLE) {
+            // Draw sprite for circle melee hitbox
+            g2.setColor(new Color(255, 255, 255, 150));
+            g2.drawImage(sprite, cx - radius, cy - radius, radius * 2, radius * 2, null);
         } else {
-            g2.fillOval(cx - radius, cy - radius, radius * 2, radius * 2);
+            // Fallback to simple shapes
+            g2.setColor(color);
+            if (type == Type.RECT) {
+                g2.fillRect(rx, ry, rwidth, rheight);
+            } else {
+                g2.fillOval(cx - radius, cy - radius, radius * 2, radius * 2);
+            }
         }
     }
 
