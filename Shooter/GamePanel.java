@@ -118,14 +118,15 @@ public class GamePanel extends JPanel implements Runnable {
             }
 
             // Update enemies
-            Iterator<Enemy> eIterator = enemies.iterator();
-            while (eIterator.hasNext()) {
-                Enemy e = eIterator.next();
+            // Using reverse iteration to safely handle concurrent modifications
+            // (e.g., Engineer spawning Turret during update)
+            for (int i = enemies.size() - 1; i >= 0; i--) {
+                Enemy e = enemies.get(i);
                 if (e.isAlive()) {
                     e.update();
                 } else {
                     player.gainXP(e.xpValue);
-                    eIterator.remove();
+                    enemies.remove(i);
                 }
             }
 
