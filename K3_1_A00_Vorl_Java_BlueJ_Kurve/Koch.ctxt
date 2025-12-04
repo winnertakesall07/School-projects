@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Koch
+comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Koch.\r\n\ \r\n\ @author\ (Ihr\ Name)\ \r\n\ @version\ (eine\ Versionsnummer\ oder\ ein\ Datum)\r\n
+comment1.params=
+comment1.target=Koch()
+comment1.text=\r\n\ Konstruktor\ f\u00FCr\ Objekte\ der\ Klasse\ Koch\r\n
+comment2.params=laengeE
+comment2.target=void\ zeichne(int)
+comment3.params=laenge
+comment3.target=void\ zeichneKoch(int)
+comment4.params=laenge
+comment4.target=void\ schrit(int)
+numComments=5

@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=Kurve
+comment0.text=\r\n\ Zeichnet\ die\ Levy-C-Kurve\r\n\ \r\n\ @author\ Albert\ Wiedemann\ \r\n\ @version\ 1.0\r\n
+comment1.params=
+comment1.target=Kurve()
+comment1.text=\r\n\ Legt\ die\ Turtle\ an\r\n
+comment2.params=tiefe\ farbe
+comment2.target=void\ KurveZeichnen(int,\ java.lang.String)
+comment2.text=\r\n\ Zeichnet\ die\ Levy-C-Kurve\ mit\ der\ gegebenen\ Tiefe\ in\ der\ angegebenen\ Farbe.\r\n\ @param\ tiefe\ Rekursionstiefe\r\n\ @param\ farbe\ die\ Linienfarbe\r\n
+comment3.params=zahl\ farbe
+comment3.target=void\ quadrat(int,\ java.lang.String)
+comment4.params=zahl
+comment4.target=void\ quadratE(int)
+comment5.params=
+comment5.target=void\ KurveZeichnen0bis3()
+comment5.text=\r\n\ Zeichnet\ die\ Levy-C-Kurve\ mit\ den\ Tiefen\ 0\ bis\ 3\r\n
+comment6.params=
+comment6.target=void\ laengeListe()
+comment7.params=l\u00E4nge\ tiefe
+comment7.target=void\ SchrittAusf\u00FChren(double,\ int)
+comment7.text=\r\n\ Zeichnet\ ein\ Element\ der\ Kurve\ durch\ Ausf\u00FChren\ des\ n\u00E4chsten\ Rekursionsschrittes\r\n\ @param\ l\u00E4nge\ die\ Linienl\u00E4nge\r\n\ @param\ tiefe\ die\ (restliche)\ Rekursionstiefe\r\n
+numComments=8
