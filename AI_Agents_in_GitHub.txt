@@ -337,12 +337,17 @@ a) CODE VISIBILITY
    - Your codebase might be used to train models (check provider policies)
    - Be cautious with proprietary or confidential code
    - Use agents from trusted providers with clear privacy policies
+   - For GitHub Copilot: Check your organization settings to see data retention
+     and training policies (Business/Enterprise plans offer more control)
+   - Review GitHub Copilot data usage at: 
+     https://docs.github.com/en/copilot/managing-copilot/managing-copilot-as-an-individual-subscriber
 
 b) DATA PROTECTION
    - Don't include personal information in prompts to agents
    - Be careful with customer data or sensitive information
    - Ensure your organization's data policies are followed
    - Check if your GitHub organization has specific AI usage policies
+   - Review your organization's Copilot settings if available
 
 c) BEST PRACTICES
    - Review your organization's policies on AI tool usage
@@ -516,7 +521,12 @@ To learn more about AI agents and GitHub:
   - GitHub Copilot Documentation: https://docs.github.com/en/copilot
   - GitHub Actions Documentation: https://docs.github.com/en/actions
   - GitHub Security Best Practices: https://docs.github.com/en/security
-  - AI Safety and Ethics Resources: Various academic and industry sources
+  
+AI Ethics and Safety Resources:
+  - Partnership on AI: https://partnershiponai.org/
+  - Montreal AI Ethics Institute: https://montrealethics.ai/
+  - Stanford HAI (Human-Centered AI): https://hai.stanford.edu/
+  - MIT AI Ethics: https://computing.mit.edu/cross-cutting/social-and-ethical-responsibilities-computing/
 
 Remember: The field of AI agents is rapidly evolving. Stay informed about new
 capabilities, best practices, and potential risks as the technology develops.
