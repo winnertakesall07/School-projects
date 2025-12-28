@@ -53,7 +53,7 @@ A Java Swing application that simulates handwriting by rendering text with uniqu
 
 For each character drawn, the program applies:
 - **Position Jitter**: Random x/y offset (±3-4 pixels)
-- **Rotation**: Random tilt (±8 degrees)
+- **Rotation**: Random tilt (±4.3 degrees)
 - **Shear**: Random slant for italic-like effect
 - **Scale**: Random size variation (90-110% of base size)
 - **Spacing**: Random gaps between characters
