@@ -152,10 +152,18 @@ public class HandwritingPanel extends JPanel {
      * @param g2d The Graphics2D context
      */
     private void drawPaperTexture(Graphics2D g2d) {
+        int width = getWidth();
+        int height = getHeight();
+        
+        // Skip if component hasn't been laid out yet
+        if (width <= 0 || height <= 0) {
+            return;
+        }
+        
         g2d.setColor(new Color(240, 240, 245));
         for (int i = 0; i < 5; i++) {
-            int x1 = random.nextInt(getWidth());
-            int y1 = random.nextInt(getHeight());
+            int x1 = random.nextInt(width);
+            int y1 = random.nextInt(height);
             int x2 = x1 + random.nextInt(100) - 50;
             int y2 = y1 + random.nextInt(100) - 50;
             g2d.setStroke(new BasicStroke(0.5f));
@@ -169,10 +177,18 @@ public class HandwritingPanel extends JPanel {
      * @param g2d The Graphics2D context
      */
     private void drawInkSpots(Graphics2D g2d) {
+        int width = getWidth();
+        int height = getHeight();
+        
+        // Skip if component hasn't been laid out yet
+        if (width <= 0 || height <= 0) {
+            return;
+        }
+        
         g2d.setColor(new Color(50, 50, 50, 30)); // Semi-transparent dark gray
         for (int i = 0; i < 3; i++) {
-            int x = random.nextInt(getWidth());
-            int y = random.nextInt(getHeight());
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
             int size = 1 + random.nextInt(2);
             g2d.fillOval(x, y, size, size);
         }
