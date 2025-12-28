@@ -102,7 +102,7 @@ public class HandwritingPanel extends JPanel {
             transform.translate(x + xJitter, y + yJitter);
             
             // 2. Random rotation (slight tilt)
-            double rotation = (random.nextDouble() - 0.5) * 0.15; // ~8 degrees max
+            double rotation = (random.nextDouble() - 0.5) * 0.15; // ±0.075 radians (~±4.3 degrees)
             transform.rotate(rotation);
             
             // 3. Random shear (slant)
@@ -119,13 +119,9 @@ public class HandwritingPanel extends JPanel {
             // Set the base font
             g2d.setFont(baseFont);
             
-            // Add slight color variation (darker/lighter gray-black)
-            int colorVariation = 200 + random.nextInt(56); // 200-255
-            g2d.setColor(new Color(
-                Math.max(0, colorVariation - 180 + random.nextInt(20)),
-                Math.max(0, colorVariation - 180 + random.nextInt(20)),
-                Math.max(0, colorVariation - 180 + random.nextInt(20))
-            ));
+            // Add slight color variation (dark gray to black)
+            int grayValue = 20 + random.nextInt(76); // Range: 20-95 (dark colors)
+            g2d.setColor(new Color(grayValue, grayValue, grayValue));
             
             // Draw the character
             g2d.drawString(String.valueOf(c), 0, 0);
@@ -133,13 +129,13 @@ public class HandwritingPanel extends JPanel {
             // Restore original transform
             g2d.setTransform(originalTransform);
             
-            // Calculate character width for next position
+            // Calculate character width for next position (accounting for scale)
             FontMetrics fm = g2d.getFontMetrics(baseFont);
-            int charWidth = fm.charWidth(c);
+            int baseCharWidth = fm.charWidth(c);
             
             // Add random spacing variation
             double spacingJitter = (random.nextDouble() - 0.5) * 4;
-            x += charWidth * scale + spacingJitter;
+            x += baseCharWidth * scale + spacingJitter;
         }
         
         // Add some random "ink spots" or imperfections
