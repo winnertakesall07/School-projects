@@ -102,10 +102,12 @@ public class HandwritingPanel extends JPanel {
             transform.translate(x + xJitter, y + yJitter);
             
             // 2. Random rotation (slight tilt)
-            double rotation = (random.nextDouble() - 0.5) * 0.15; // ±0.075 radians (~±4.3 degrees)
+            // Range: (random-0.5)*0.15 = ±0.075 radians (~±4.3 degrees)
+            double rotation = (random.nextDouble() - 0.5) * 0.15;
             transform.rotate(rotation);
             
             // 3. Random shear (slant)
+            // shearX: ±0.1 (horizontal slant), shearY: ±0.05 (vertical slant)
             double shearX = (random.nextDouble() - 0.5) * 0.2;
             double shearY = (random.nextDouble() - 0.5) * 0.1;
             transform.shear(shearX, shearY);

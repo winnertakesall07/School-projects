@@ -73,10 +73,10 @@ The random number generator is reseeded with `System.nanoTime()` each time you c
 You can modify these parameters in `HandwritingPanel.java`:
 
 - **Base font size**: Line 64 - `Font baseFont = new Font("SansSerif", Font.PLAIN, 36);`
-- **Position jitter**: Lines 105-106 - Adjust the multiplication factor
-- **Rotation range**: Line 109 - Adjust the 0.15 value
-- **Shear range**: Lines 112-113 - Adjust the 0.2 and 0.1 values
-- **Scale range**: Line 116 - Adjust the 0.9 to 1.1 range
+- **Position jitter**: Lines 100-101 - Adjust the multiplication factors
+- **Rotation range**: Line 106 - Adjust the 0.15 value
+- **Shear range**: Lines 109-110 - Adjust the 0.2 and 0.1 values
+- **Scale range**: Line 114 - Adjust the 0.9 to 1.1 range
 
 ## Example Use Cases
 
