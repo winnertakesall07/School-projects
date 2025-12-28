@@ -116,10 +116,8 @@ public class HandwritingPanel extends JPanel {
             
             g2d.setTransform(transform);
             
-            // Apply random font variations
-            int fontStyle = random.nextBoolean() ? Font.PLAIN : Font.PLAIN;
-            Font charFont = baseFont.deriveFont(fontStyle);
-            g2d.setFont(charFont);
+            // Set the base font
+            g2d.setFont(baseFont);
             
             // Add slight color variation (darker/lighter gray-black)
             int colorVariation = 200 + random.nextInt(56); // 200-255
@@ -136,7 +134,7 @@ public class HandwritingPanel extends JPanel {
             g2d.setTransform(originalTransform);
             
             // Calculate character width for next position
-            FontMetrics fm = g2d.getFontMetrics(charFont);
+            FontMetrics fm = g2d.getFontMetrics(baseFont);
             int charWidth = fm.charWidth(c);
             
             // Add random spacing variation
