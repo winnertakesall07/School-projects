@@ -1,0 +1,49 @@
+1: DLOAD 28
+2: STORE 10 --zahl zu schaeken
+3: DLOAD 1
+4: STORE 1 --zaheler
+5: STORE 2 --zahl 1
+6: LOAD 10
+7: DIV 1
+8: MULT 1
+9: SUB 10 --rest?
+10: JNE 14 --falls kein rest
+11: LOAD 1
+12: ADD 3
+13: STORE 3 --store zum addieren
+14: LOAD 1
+15: ADD 2
+16: STORE 1 --make zaehler eins groesser
+17: SUB 10
+18: JNE 6 --loop
+19: LOAD 10
+20: SUB 3
+21: JEQ 24
+22: LOAD 13 --falsch
+23: END
+24: LOAD 2 --rightig
+25: END
+26:
+27:
+28:
+29:
+30:
+31:
+32:
+33:
+34:
+35:
+36:
+37:
+38:
+39:
+40:
+41:
+42:
+43:
+44:
+45:
+46:
+47:
+48:
+49:

@@ -1,0 +1,56 @@
+1: DLOAD 1
+2: STORE 3 --zahl fuer sub
+3: DLOAD 5
+4: STORE 1 --zahl fuer das Ergebnis
+5: STORE 2 --mult zahl
+6: DLOAD 5
+7: STORE 11 --k
+8: DLOAD 9
+9: STORE 10 --n
+10: SUB 11
+11: STORE 12 --n-k
+12: LOAD 5 --checken ob n bearbeitet wurde
+13: JNE 16
+14: LOAD 10
+15: JGE 28
+16: LOAD 6 --checken ob k bearbeitet wurde
+17: JNE 20
+18: LOAD 11
+19: JGE 28
+20: LOAD 7 --checken ob n-k bearbeitet wurde
+21: JNE 24
+22: LOAD 12
+23: JGE 28
+24: LOAD 6 --hauptrechnung
+25: MULT 7
+26: STORE 8
+27: JGE 54 --jump fuer platz
+28: STORE 1 --zahl fuer das Ergebnis
+29: STORE 2 --mult zahl
+30: JEQ 39 --multiplikator nicht 0
+31: LOAD 2
+32: SUB 3
+33: STORE 2
+34: MULT 1
+35: STORE 1
+36: LOAD 2
+37: SUB 3
+38: JGE 30
+39: LOAD 5 --n schon besetzt?
+40: JNE 44
+41: LOAD 1
+42: STORE 5
+43: JGE 53
+44: LOAD 6 --k schon besetzt
+45: JNE 49
+46: LOAD 1
+47: STORE 6
+48: JGE 53
+49: LOAD 7 --n-k besetzt?
+50: JNE 51
+51: LOAD 1
+52: STORE 7
+53: JGE 12
+54: LOAD 5
+55: DIV 8
+56: END

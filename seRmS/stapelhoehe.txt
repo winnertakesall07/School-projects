@@ -1,0 +1,49 @@
+1: DLOAD 80
+2: STORE 1 --h1
+3: DLOAD 55
+4: STORE 2 --h2
+5: DLOAD 200
+6: STORE 3 --max hoehe
+7: DIV 1
+8: STORE 10 -- h1 max
+9: DLOAD -1
+10:  STORE 0
+11: LOAD 10
+12: MULT 1
+13: SUB 3
+14: MULT 0
+15: STORE 9 -- rest
+16: DIV 2
+17: STORE 11 -- h1->h2 max
+18: MULT 2
+19: SUB 9
+20: MULT 0
+21: STORE 5 --minimaler platz, h1 first dann h2
+22: LOAD 3
+23: DIV 2
+24: STORE 14 -- h2 max
+25: MULT 2
+26: SUB 3
+27: MULT 0
+28: STORE 8 --rest h2
+29: DIV 1
+30: STORE 15 -- h2->h1 max
+31: MULT 1
+32: SUB 8
+33: MULT 0
+34: STORE 6 --minimaler platz, h2 first dann h1
+35: LOAD 5
+36: SUB 6
+37: JNE 40 --falls nicht 0
+38: LOAD 4
+39: END
+40: JLT 43 --falls h1 zuerst falsch
+41: LOAD 1
+42: END
+43: LOAD 2
+44: END
+45:
+46:
+47:
+48:
+49:

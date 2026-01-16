@@ -1,0 +1,16 @@
+1: DLOAD 1
+2: STORE 3 --zahl fuer sub
+3: DLOAD 5
+4: STORE 1 --zahl fuer das Ergebnis
+5: STORE 2 --mult zahl
+6: JEQ 15 --multiplikator nicht 0
+7: LOAD 2
+8: SUB 3
+9: STORE 2
+10: MULT 1
+11: STORE 1
+12: LOAD 2
+13: SUB 3
+14: JGE 6
+15: LOAD 1
+16: END
