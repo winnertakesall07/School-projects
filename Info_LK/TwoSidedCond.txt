@@ -1,0 +1,18 @@
+-- Input
+1: DLOAD 4 --a
+2: STORE 0 
+3: DLOAD 8 --b
+4: STORE 1
+-- Calculations
+-- a > b -> a = a - b
+-- a <= b -> b = b - a
+5: LOAD 0
+6: SUB 1
+7: JLE 10
+8: STORE 0
+9: END
+-- if a <= b
+10: LOAD 1
+11: SUB 0
+12: STORE 1
+-- Output: R0 -> a; R1 -> b;

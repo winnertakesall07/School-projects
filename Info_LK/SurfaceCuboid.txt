@@ -1,0 +1,30 @@
+--Input
+1:DLOAD 2 -- a
+2:STORE 0
+3:DLOAD 2 -- b
+4:STORE 1
+5:DLOAD 4 -- c
+6:STORE 2
+--Calculations O = 2*(a*b + b*c + a*c)
+--Workin Cell 3
+--Still c in A beginning with a*c
+-- a*c 
+7:MULT 0
+8:STORE 3
+-- b * c 
+9:LOAD 1
+10:MULT 2
+11:STORE 4
+--a*b
+12:LOAD 1
+13:MULT 0
+14:STORE 5
+-- A is a*b; A + b*c
+15:ADD 4
+-- A + a*c
+16:ADD 3
+17:STORE 6
+-- A * 2
+18:DLOAD 2
+19:MULT 6
+20:STORE 7
