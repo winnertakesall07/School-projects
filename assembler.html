@@ -1,0 +1,178 @@
+<html>
+<head>
+<title>Minimaschine</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<h1 align=center>3. Die Assemblersprache</h1>
+<h2>3.1 Aufbau der Assemblersprache</h2>
+<p>Als typischer Vertreter einer einfachen Registermaschine hat die Minimaschine einen
+Akkumulator, der bei Rechenoperationen vor der jeweiligen Operation den ersten Operanden 
+und nach Ausführung der Operation das
+Ergebnis beinhaltet. Bei Speicheroperationen ist er Ziel oder Quelle. Entsprechend ist
+die Maschine als Ein-Adress-Maschine konzipiert, d. h. die Befehle haben einen Adressteil
+(in der Regel Speicheradresse oder direkt verwendete Zahl); bei speziellen Befehlen wird der Adressteil nicht benutzt.<p>
+<p>Der Assembler erlaubt sowohl absolute Adressierung, d. h. Angabe betroffener Speicherzellen
+als konkrete Zahlenwerte, als auch symbolische Adressierung. Dabei wird als Adressteil
+eine Marke (Bezeichner) angegeben; diese Marke ist an anderer Stelle (Programm oder
+Daten) vereinbart. Der Assembler berechnet dann die Adresse automatisch.</p>
+<p>Die Adressierungsarten im Detail:</p>
+<ul>
+<li>Direkte Adressierung der Form &lt;Adresse&gt;: der Adressteil bezeichent die Adresse der anzusprechenden Speicherzelle</li>
+<li>Indirekte Adressierung der Form (&lt;Adresse&gt;):  der Adressteil bezeichent eine Speicherzelle, in der die Adresse der anzusprechenden Speicherzelle steht</li>
+<li>Immediate-Adressierung der Form $&lt;Adresse&gt;: der Adressteil ist der Operand; die Immediate-Pseudobefehle mit der Endung &quot;I&quot; haben die gleiche Wirkung</li>
+</ul>
+<p>Durch das Einschalten der Erweiterungen werden neben dem Stackpointerregister und zusätzlichen
+Befehlen auch weitere Adressierungsarten um Zugriff auf auf dem Stack gespeicherte Werte ermöglicht.</p>
+<ul>
+<li>Offset-Adressierung der Form &lt;Adresse&gt;(SP): die Summe aus Adresse und Stackpointerwert bezeichent die Adresse der anzusprechenden Speicherzelle</li>
+<li>Offset-Indirekt-Adressierung der Form @&lt;Adresse&gt;(SP): die Summe aus Adresse und Stackpointerwert bezeichnet eine Speicherzelle, in der die Adresse der anzusprechenden Speicherzelle steht</li>
+<li>Immediate-Offset-Adressierung der Form $&lt;Adresse&gt;(SP): der Adressteil, d. h. die Summe aus Stackpointerwert und Adresse, ist der Operand</li>
+</ul>
+<h2>3.2 Programmaufbau</h2>
+<p>Assemblerprogramme haben einen sehr einfach strukturierten Aufbau. Ein Assemblerprogramm 
+besteht aus einer Folge von Befehlszeilen. Jede Befehlszeile besteht aus einer
+optionalen Marke, dem Befehl und einem optionalen (vom Befehl abhängenden)
+Adressteil. Leere Zeilen oder Zeilen, die nur eine Marke enthalten, sind ebenfalls möglich.</p>
+<p>Das Zeichen "#" leitet einen Kommentar ein. Kommentare gehen grundsätzlich
+bis zum Ende der Zeile.</p>
+<pre># Algorithmus, um ein Produkt mittels wiederholter Addition zu berechen.
+    LOADI   0
+    STORE   Produkt        # Ergebnis vorbesetzen
+Start:                     # Start der Wiederholung
+    LOAD    Faktor1
+    JMPNP   Ende           # Beenden, wenn der Zähler kleiner als 0 geworden ist
+    SUBI    1              # Zähler erniedrigen
+    STORE   Faktor1
+    LOAD    Produkt
+    ADD     Faktor2
+    STORE   Produkt        # Ergebnis erhöhen
+    JMP     Start
+Ende:
+    HOLD                   # Maschine anhalten
+# Datenteil
+Faktor1:    WORD    5      # Der erste Faktor dient als Zähler für die Wiederholung der Addition
+Faktor2:    WORD    4      # Der zweite Faktor wird fortwährend addiert
+Produkt:    WORD    0      # Platz für das Ergebnis</pre>
+<h2>3.3 Syntax der Assemblersprache</h2>
+<p>In EBNF lässt sich die Syntax der Assemblersprache kurz zusammenfassen. Die Erweiterungen sind <i>kursiv</i> dargestellt.</p>
+<pre>
+Programm            = {Zeile} . 
+Zeile               = [Markenvereinbarung] [Befehl] . 
+Markenvereinbarung  = Marke ":" . 
+Marke               = ( "A" .. "Z" | "a" .. "z" ) { "A" .. "Z" | "a" .. "z" | "0" .. "9" | "_" | "$" } . 
+Befehl              = Operation [ Adresse | "(" Adresse ")" | $Adresse | <i>Adresse(SP)</i> | <i>@Adresse(SP)</i> | <i>$Adresse(SP)</i> ].
+Operation           = OperationGroß | OperationKlein .
+OperationGroß       = "HOLD" | "RESET" | "NOOP" | "LOAD" | "LOADC" | "STORE" |
+                      "ADD" | "SUB" | "MUL" | "DIV" | "DIVU" | "MOD" | "MODU" | "CMP" | "MULH" | "MULHU" |
+                      "AND" | "OR" | "XOR" | "NOT" | "SHL" | "SHR" | "SHRA" |
+                      "JMPP" | "JMPNN" | "JMPN" | "JMPNP" | "JMPZ" | "JMPNZ" | "JMPV" | "JMPC" | "JMP" |
+                      "JGT" | "JGE" | "JLT" | "JLE" | "JEQ" | "JNE" | "JHI" | "JHS" | "JLO" | "JLS" |
+                      "ADDI" | "SUBI" | "MULI" | "DIVI" | "DIVUI" | "MODI" | "MODUI" | "CMPI" | "MULHI" | "MULHUI" | "LOADI" |
+                      "ANDI" | "ORI" | "XORI" | "SHLI" | "SHRI" | "SHRAI" |
+                      <i>"JSR"</i> | <i>"RTS"</i> | <i>"PUSH"</i> | <i>"POP"</i> | <i>"RSV"</i> | <i>"REL"</i> | <i>"CALL"</i> | <i>"RETURN"</i> |
+                      "WORD" .
+OperationKlein      = "hold" | "reset" | "noop" |  "load" | "loadc" | "store" |
+                      "add" | "sub" | "mul" | "div" | "divu" | "mod" | "modu" | "cmp" | "mulh" | "mulhu" |
+                      "and" | "or | "xor | "not | "shl | "shr | "shra" |
+                      "jmpp" | "jmpnn" | "jmpn | "jmpnp" | "jmpz" | "jmpnz" | "jmpv" | "jmpc" | "jmp |
+                      "jgt" | "jge" | "jlt" | "jle" | "jeq" | "jne" | "jhi" | "jhs" | "jlo" | "jls" |
+                      "addi" | "subi" | "muli" | "divi" | "divui" | "modi" | "modui" | "cmpi" | "mulhi" | "mulhui" | "loadi" |
+                      "andi" | "ori" | "xori" | "shli" | "shri" | "shrai" |
+                      <i>"jsr"</i> | <i>"rts"</i> | <i>"push"</i> | <i>"pop"</i> | <i>"rsv"</i> | <i>"rel"</i> | <i>"call"</i> | <i>"return"</i> |
+                      "word" .
+Adresse             = Marke | Zahl | HexZahl . 
+HexZahl             = "0" ("x" | "X" ) ( "0" .. "9" | "A" .. "F" | "a" .. "f" ) { "0" .. "9" | "A" .. "F" | "a" .. "f" } . 
+Zahl                = ( "0" .. "9" ) { "0" .. "9" } . 
+</pre>
+<p>Die mit "#" eingeleiteten Kommentare treten im Syntaxdiagramm nicht auf, da sie entsprechend
+den Leerzeichen, Tabulatoren oder Zeilenwechseln bereits bei der Zerlegung des Quelltextes in Terminalsymbole
+abgearbeitet werden.</p>
+<h2>3.4 Befehlsübersicht</h2>
+<p>Die folgende Tabelle beschreibt die Befehle der Minimaschine geordnet nach Funktionsgruppen. Wiedergegeben sind
+nur die großgeschriebenen Varianten der Befehlsmnemonics.</p>
+<table border=2>
+<tr><td colspan=2>Speicherbefehle</td></tr>
+<tr><td style="width:120px">LOAD adresse</td><td>Lädt den Wert von der angegebenen Adresse in den Akkumulator.</td></tr>
+<tr><td>LOADI zahl</td><td>Lädt die angegebene Zahl in den Akkumulator, negative Werte sind möglich, Adressen sind nicht zulässig.</td></tr>
+<tr><td>STORE adresse</td><td>Speichert den Wert im Akkumulator an der angegebenen Adresse.</td></tr>
+<tr><td colspan=2><br>Arithmetikbefehle</td></tr>
+<tr><td>ADD adresse</td><td>Addiert den Wert von der angegebenen Adresse zum Akkumulator.</td></tr>
+<tr><td>SUB adresse</td><td>Subtrahiert den Wert der angegebenen Adresse vom Akkumulator.</td></tr>
+<tr><td>MUL adresse</td><td>Multipliziert den Wert von der angegebenen Adresse zum Akkumulator.</td></tr>
+<tr><td>DIV adresse</td><td>Dividiert den Wert im Akkumulator durch den Wert der angegebenen Adresse.</td></tr>
+<tr><td>MOD adresse</td><td>Dividiert den Wert im Akkumulator durch den Wert der angegebenen Adresse und speichert den Rest im Akkumulator.</td></tr>
+<tr><td>DIVU adresse</td><td>Dividiert den Wert im Akkumulator durch den Wert der angegebenen Adresse vorzeichenlos.</td></tr>
+<tr><td>MODU adresse</td><td>Dividiert den Wert im Akkumulator durch den Wert der angegebenen Adresse vorzeichenlos und speichert den Rest im Akkumulator.</td></tr>
+<tr><td>MULH adresse</td><td>Multipliziert den Wert von der angegebenen Adresse zum Akkumulator und speicher die oberen 16 Bit im Akkumulator.</td></tr>
+<tr><td>MULHU adresse</td><td>Multipliziert den Wert von der angegebenen Adresse zum Akkumulator vorzeichenlos und speicher die oberen 16 Bit im Akkumulator.</td></tr>
+<tr><td>CMP adresse</td><td>Vergleicht den Wert der angegebenen Adresse mit dem Akkumulator und setzt Null- und Negativflag entsprechend.</td></tr>
+<tr><td>ADDI zahl</td><td>Addiert den angegebenen Wert zum Akkumulator.</td></tr>
+<tr><td>SUBI zahl</td><td>Subtrahiert den angegebenen Wert vom Akkumulator.</td></tr>
+<tr><td>MULI zahl</td><td>Multipliziert den angegebenen Wert zum Akkumulator.</td></tr>
+<tr><td>DIVI zahl</td><td>Dividiert den Wert im Akkumulator durch den angegebenen Wert.</td></tr>
+<tr><td>MODI zahl</td><td>Dividiert den Wert im Akkumulator durch den angegebenen Wert und speichert den Rest im Akkumulator.</td></tr>
+<tr><td>DIVUI zahl</td><td>Dividiert den Wert im Akkumulator durch den angegebenen Wert vorzeichenlos.</td></tr>
+<tr><td>MODUI zahl</td><td>Dividiert den Wert im Akkumulator durch den angegebenen Wert vorzeichenlos und speichert den Rest im Akkumulator.</td></tr>
+<tr><td>MULHI zahl</td><td>Multipliziert den angegebenen Wert zum Akkumulator und speicher die oberen 16 Bit im Akkumulator.</td></tr>
+<tr><td>MULHUI zahl</td><td>Multipliziert den angegebenen Wert zum Akkumulator vorzeichenlos und speicher die oberen 16 Bit im Akkumulator.</td></tr>
+<tr><td>CMPI zahl</td><td>Vergleicht den angegebenen Wert mit dem Akkumulator und setzt Null- und Negativflag entsprechend.</td></tr>
+<tr><td colspan=2><br>Bitmanipulationsbefehle</td></tr>
+<tr><td>AND adresse</td><td>Bitweise logische Und-Verknüpfung des Werts der angegebenen Adresse mit dem Akkumulator.</td></tr>
+<tr><td>OR adresse</td><td>Bitweise logische Oder-Verknüpfung des Werts der angegebenen Adresse mit dem Akkumulator.</td></tr>
+<tr><td>XOR adresse</td><td>Bitweise logische Exklusiv-Oder-Verknüpfung des Werts der angegebenen Adresse mit dem Akkumulator.</td></tr>
+<tr><td>NOT</td><td>Bitweise logische Invertierung des Werts im Akkumulator.</td></tr>
+<tr><td>SHL adresse</td><td>Die Bitfolge im Akkumulator wird um die unter der angegebenen Adresse gespeicherten Anzahl Bits nach links geschoben.<br>Frei werdende Bits werden mit 0-Werten belegt.</td></tr>
+<tr><td>SHR adresse</td><td>Die Bitfolge im Akkumulator wird um die unter der angegebenen Adresse gespeicherten Anzahl Bits nach rechts geschoben.<br>Frei werdende Bits werden mit 0-Werten belegt.</td></tr>
+<tr><td>SHRA adresse</td><td>Die Bitfolge im Akkumulator wird um die unter der angegebenen Adresse gespeicherten Anzahl Bits nach rechts geschoben.<br>Frei werdende Bits werden mit dem ursprünglich vordersten Bit belegt (Vorzeichenerhalt).</td></tr>
+<tr><td>ANDI zahl</td><td>Bitweise logische Und-Verknüpfung der angegebenen Zahl mit dem Akkumulator.</td></tr>
+<tr><td>ORI zahl</td><td>Bitweise logische Oder-Verknüpfung der angegebenen Zahl mit dem Akkumulator.</td></tr>
+<tr><td>XORI zahl</td><td>Bitweise logische Exklusiv-Oder-Verknüpfung der angegebenen Zahl mit dem Akkumulator.</td></tr>
+<tr><td>SHLI zahl</td><td>Die Bitfolge im Akkumulator wird um die angegebene Anzahl Bits nach links geschoben.<br>Frei werdende Bits werden mit 0-Werten belegt.</td></tr>
+<tr><td>SHRI zahl</td><td>Die Bitfolge im Akkumulator wird um die angegebene Anzahl Bits nach rechts geschoben.<br>Frei werdende Bits werden mit 0-Werten belegt.</td></tr>
+<tr><td>SHRAI zahl</td><td>Die Bitfolge im Akkumulator wird um die angegebene Anzahl Bits nach rechts geschoben.<br>Frei werdende Bits werden mit dem ursprünglich vordersten Bit belegt (Vorzeichenerhalt).</td></tr>
+<tr><td colspan=2><br>Sprungbefehle</td></tr>
+<tr><td>JMPP adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation positiv (&gt; 0) war, d. h. weder N noch Z-Flag sind gesetzt.</td></tr>
+<tr><td>JMPNN adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation nicht negativ (&ge; 0) war, d. h. das N-Flag ist nicht gesetzt.</td></tr>
+<tr><td>JMPN adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation negativ (&lt; 0) war, d. h. das N-Flag ist gesetzt.</td></tr>
+<tr><td>JMPNP adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation nicht positiv (&le; 0) war, d. h. das N-Flag  oder das Z-Flag ist gesetzt.</td></tr>
+<tr><td>JMPZ adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation null (= 0) war, d. h. das Z-Flag ist gesetzt.</td></tr>
+<tr><td>JMPNZ adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation nicht null (&ne; 0) war, d. h. das Z-Flag ist nicht gesetzt.</td></tr>
+<tr><td>JMPV adresse</td><td>Springt zur angegebenen Adresse, wenn die letzte Operation einen vorzeichenbehafteten Überlauf verursacht hat, d. h. das V-Flag ist gesetzt.</td></tr>
+<tr><td>JMPC adresse</td><td>Springt zur angegebenen Adresse, wenn die letzte Operation einen vorzeichenlosen Überlauf verursacht hat, d. h. das C-Flag ist gesetzt.</td></tr>
+<tr><td>JMP adresse</td><td>Springt zur angegebenen Adresse.</td></tr>
+<tr><td colspan=2><br>Alternative Notation der Sprungbefehle</td></tr>
+<tr><td>JGT adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation positiv (&gt; 0) war, d. h. weder N noch Z-Flag sind gesetzt.</td></tr>
+<tr><td>JGE adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation nicht negativ (&ge; 0) war, d. h. das N-Flag ist nicht gesetzt.</td></tr>
+<tr><td>JLT adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation negativ (&lt; 0) war, d. h. das N-Flag ist gesetzt.</td></tr>
+<tr><td>JLE adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation nicht positiv (&le; 0) war, d. h. das N-Flag  oder das Z-Flag ist gesetzt.</td></tr>
+<tr><td>JEQ adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation null (= 0) war, d. h. das Z-Flag ist gesetzt.</td></tr>
+<tr><td>JNE adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation nicht null (&ne; 0) war, d. h. das Z-Flag ist nicht gesetzt.</td></tr>
+<tr><td>JOV adresse</td><td>Springt zur angegebenen Adresse, wenn die letzte Operation einen vorzeichenbehafteten Überlauf verursacht hat, d. h. das V-Flag ist gesetzt.</td></tr>
+<tr><td>JOC adresse</td><td>Springt zur angegebenen Adresse, wenn die letzte Operation einen vorzeichenlosen Überlauf verursacht hat, d. h. das C-Flag ist gesetzt.</td></tr>
+<tr><td colspan=2><br>Bedingte Sprungbefehle für vorzeichenlose Arithmetik</td></tr>
+<tr><td>JHI adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation positiv (&gt; 0) war, d. h. weder C noch Z-Flag sind gesetzt.</td></tr>
+<tr><td>JHS adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation nicht negativ (&ge; 0) war, d. h. das C-Flag ist nicht gesetzt.</td></tr>
+<tr><td>JLO adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation negativ (&lt; 0) war, d. h. das C-Flag ist gesetzt.</td></tr>
+<tr><td>JLS adresse</td><td>Springt zur angegebenen Adresse, wenn das Ergebnis der letzen Operation nicht positiv (&le; 0) war, d. h. das C-Flag  oder das Z-Flag ist gesetzt.</td></tr>
+<tr><td colspan=2><br>Sonstige Befehle</td></tr>
+<tr><td>HOLD</td><td>Hält den Prozessor an. Dieser Befehl hat keine Adresse.</td></tr>
+<tr><td>RESET</td><td>Setzt den Prozessor auf den Startzustand zurück. Dieser Befehl hat keine Adresse.</td></tr>
+<tr><td>NOOP</td><td>Tut einfach nichts (NO OPeration). Dieser Befehl hat keine Adresse.</td></tr>
+<tr><td>LOADC</td><td>Lädt den Wert des Carry-Flags in den Akkumulator (1 für WAHR, 0 für FALSE). Dieser Befehl hat keine Adresse.</td></tr>
+<tr><td colspan=2><br><i>Den Stackpointer verändernde Befehle</i></td></tr>
+<tr><td><i>JSR</i></td><td><i>Springt zu der angegebenen Adresse und speichert den Folge-PC auf dem Stack (Unterprogrammaufruf).<br>
+Der Stackpointer wird dazu um 1 erniedrigt.</i></td></tr>
+<tr><td><i>RTS</i></td><td><i>Springt zu der Adresse in der Speicherzelle, auf dei der Stackpointer zeigt (Unterprogamrücksprung).<br>
+Der Stackpointer wird anschließend um 1 erhöht.</i></td></tr>
+<tr><td><i>PUSH</i></td><td><i>Erniedrigt den Stackpointer um 1 und speichert den Akkumulatorwert an der nun durch den Stackpointer gegebenen Adresse.</i></td></tr>
+<tr><td><i>POP</i></td><td><i>Lädt den Inhalt der durch den Stackpointer gegebenen Adresse in den Akkumulator und erhöht den Stackpointer um 1.</i></td></tr>
+<tr><td><i>RSV</i></td><td><i>Erniedrigt den Stackpointer um den im Adressteil gegebenen Wert (Platz reservieren).</i></td></tr>
+<tr><td><i>REL</i></td><td><i>Erhöht den Stackpointer um den im Adressteil gegebenen Wert (Platz freigeben).</i></td></tr>
+<tr><td><i>CALL</i></td><td><i>Alternative Notation zu JSR.</i></td></tr>
+<tr><td><i>RETURN</i></td><td><i>Alternative Notation zu RTS.</i></td></tr>
+<tr><td colspan=2><br>Speicherorganisation</td></tr>
+<tr><td>WORD zahl</td><td>Besetzt eine Speicherzelle mit der angegebenen Zahl, negative Werte sind möglich.</td></tr>
+</table>
+</body>
+</head>

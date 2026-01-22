@@ -1,0 +1,162 @@
+<html>
+<head>
+<title>Minimaschine</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<h1 align=center>2. Bedienung der Minimaschine</h1>
+<a name=lab1>
+<h2>2.1 Ausführbare Dateien</h2>
+<p>Von der Minimaschine existieren drei ausführbare Varianten:</p>
+<table border=0>
+<tr><td>Minimaschine.jar</td><td>Ausführbare jar-Datei, die unter jedem Betriebssystem lauffähig ist.</td></tr>
+<tr><td>Minimaschine.exe</td><td>Eine speziell für MS-Windows angepasste Variante der Minimaschine.</td></tr>
+<tr><td>Minimaschine.app</td><td>Eine speziell für macOS angepasste Variante der Minimaschine ab macOS 10.13 mit eigener Java-Laufzeitumgebung.</td></tr>
+</table>
+<p>Alle Varianten (außer Minimaschine.app) setzen eine Java-Laufzeitumgebung der Version 13 oder höher voraus.</p>
+<a name=lab2>
+<h2>2.2 Start</h2>
+<p>Gestartet wird die Maschine durch Doppelklick auf das entsprechende Programmsymbol. Unter macOS und Windows
+lässt sich die Maschine auch durch Doppelklick auf eine zugeordnete Assembler- oder Minisprachendatei
+starten; die Datei wird dabei automatisch geöffnet. Nach dem Start erscheinen zwei Fenster, die die
+CPU in der detaillierten Ansicht (siehe <a href="#lab4">2.4</a>) und den Speicher (siehe <a href="#lab6">2.6</a>) repräsentieren. 
+Gegebenenfalls wird auch bereits ein Dateifenster geöffnet.</p>
+<a name=lab3>
+<h2>2.3 Die Menüzeile</h2>
+<p>Die Menüs variieren je nach ausgewähltem Fenster. Fester Bestandteil aller Menüzeilen sind:</p>
+<ul>
+<li>Die ersten Einträge des Menüs Ablage
+	<ul>
+	<li>Neu: öffnen eines neuen, leeren Editorfensters zur Programmeingabe</li>
+	<li>öffnen: öffnen einer bestehenden Datei in einem neuen Editorfenster</li>
+	</ul></li>
+<li>Das Bearbeiten-Menü mit seinen typischen Einträgen</li>
+<li>Das Werkzeuge-Menü stellt abhängig vom aktiven Fenster spezifische Aktionen bereit, erster Eintrag</li>
+	<ul>
+	<li>Große Darstellung: Stellt den Fensterinhalt für die Projektion mit dem Beamer groß dar</li>
+	</ul></li>
+<li>Das Fenster-Menü bringt die offenen Fenster in den Vordergrund; als erster Menüpunkt kann dieses Manual im Browser geöffent werden</li>
+</ul>
+<p>Der Menüpunkt Beenden ist abhängig vom Betriebssystem im Menü Minimaschine (macOS) oder
+im Menü Ablage (andere Betriebssysteme).</p>
+<p>Die fensterspezifischen Menüeinträge werden dort besprochen.</p>
+<a name=lab4>
+<h2>2.4 Das detaillierte CPU-Fenster</h2>
+<table><tr><td align=center><img src="cpu_detail.png"></td><td align=center><img src="cpu_detail_erw.png"></td></tr>
+<tr><td align=center>Voreingestellt</td><td align=center>Erweitert</td></tr></table>
+<p>Dieses Fenster stellt die Grundbestandteile der CPU sowie einen relevanten Ausschnitt aus dem Speicher dar.
+Weiter enthält es die Bedienelemente zum Ausführen eines im Speicher befindlichen Programms.</p>
+<p>Die Teile im Einzelnen von links nach rechts:</p>
+<table border = 0>
+<tr><td>Akkumulator</td><td> </td><td>Der Akkumulator der Maschine</td></tr>
+<tr><td>ALU</td><td> </td><td>Das Y-förmig dargestellte Rechenwerk zeigt links oben den ersten Operanden (Akku),
+in der Mitte oben die Operation, rechts oben den zweiten Operanden (Speicherwert oder Wert aus dem Befehl) und unten das Ergebnis der Operation</td></tr>
+<tr><td>Status</td><td> </td><td>Das Statusregister mit den vier Flags Z (letzte Operation hatte das Ergebnis 0),
+N (letzte Operation hatte ein negatives Ergebnis), V (letzte Operation hatte einen Überlauf bei vorzeichenbehafteter
+Arithmetik) und C (letzte Operation hatte einen Überlauf bei vorzeichenloser Arithmetik)</td></tr>
+<tr><td>Befehlsregister</td><td> </td><td>Das Befehlsregister zeigt Operationscode und Adressteil</td></tr>
+<tr><td>Programmzähler</td><td> </td><td>Der Programmzähler der Maschine</td></tr>
+<tr><td>Speicher oben</td><td> </td><td>Der Speicherinhalt um den Wert des Programmzählers; so sind der aktuelle
+und der folgende Befehl uninterpretiert sichtbar</td></tr>
+<tr><td>Speicher unten</td><td> </td><td>Der Speicherinhalt um den Wert des letzten Adressteils</td></tr>
+</table>
+<p>In der erweiterten Version kommen von links nach rechts dazu:</p>
+<table border = 0>
+<tr><td>Stackpointer</td><td> </td><td>Das Stackpointerregister(Kellerspeicherregister) der Maschine</td></tr>
+<tr><td>Speicher oben</td><td> </td><td>Der Speicherinhalt um den Wert des Programmzählers; so sind der aktuelle
+und der folgende Befehl uninterpretiert sichtbar</td></tr>
+<tr><td>Speicher mitte</td><td> </td><td>Der Speicherinhalt um den Wert des letzten Adressteils</td></tr>
+<tr><td>Speicher unten</td><td> </td><td>Der Speicherinhalt über dem Wert des Stackpointers</td></tr>
+</table>
+<p>Über den CPU-Bestandteilen ist der Datenbus dargestellt; im Mikroschrittmodus werden hier auch die übertragenen
+Daten dargestellt. In der Mitte steht der aktuelle Mikroschrittstatus.
+Unter den CPU-Bestandteilen ist der Adressbus dargestellt; im Mikroschrittmodus werden hier auch die
+von der CPU angelegten Adressen dargestellt.
+Unter dem Adressbus ist der Steuerbus symbolisiert. Hier wird im Mikroschrittmodus die Datenflussrichtung (Schreiben /
+Lesen) angezeigt.</p>
+<p>Ausgeführt werden Programme mithilfe der drei Knöpfe am unteren Rand des Fensters.<br>
+Mit „Ausführen” wird die Programmausführung gestartet; die Ausführung endet bei Erreichen
+des Befehls HOLD oder eines illegalen Befehlscodes.<br>
+Mit „Einzelschritt” wird genau ein Befehl ausgeführt; dieser Modus dient insbesondere zum Demonstrieren der Befehle
+oder zum Testen von Programmen.<br>
+Mit „Mikroschritt” lassen sich die einzelnen Phasen eines Befehls (Holen – Dekodieren – Ausführen) mit ihrer
+Wirkung auf Register und Busse genau betrachten.</p>
+<p>Spezielle Menüpunkte sind im Menü Werkzeuge zu finden. Hier kann man zwischen detaillierter und einfacher Ansicht
+umschalten. Mit dem Menüpunkt „Abbruchschranke setzen“ kann man die Zeit bis zum Abbruch von Programmen einstellen
+(Angabe in Sekunden). Der Menüpunkt „CPU zurücksetzen” setzt den Programmzähler und den Akkumulator auf den Wert 0
+und löscht alle Flags ohne den Speicher zu verändern; danach kann ein Programm neu gestartet werden.
+Mit den Menüpunkt „Erweitert” können die Erweiterungen an- und ausgeschaltet werden. </p>
+<a name=lab5>
+<h2>2.5 Das einfache CPU-Fenster</h2>
+<table><tr><td align=center><img src="cpu_einfach.png"></td><td align=center><img src="cpu_einfach_erw.png"></td></tr>
+<tr><td align=center>Voreingestellt</td><td align=center>Erweitert</td></tr></table>
+Dieses Fenster ist eine vereinfachte Darstellung der CPU, die nur noch die Registerinhalte und den relevanten Teil des
+Speichers zeigt. Der Knopf „Mikroschritt” ist daher in dieser Darstellung nicht angeboten.<br>
+Alle Funktionen, Knöpfe und Menüs entsprechen ansonsten genau der Beschreibung des detaillierten CPU-Fensters
+(siehe <a href="#lab4">2.4</a>).<br>
+Im erweiterten Modus wird zusätzlich das Stackpointerregister angezeigt; der Speicherauszug ist noch um den aktuellen Stackbereich ergänzt.
+<a name=lab6>
+<h2>2.6 Das Speicher-Fenster</h2>
+<p align=center><img src="speicher.png"></p>
+<p>In diesem Fenster wird der Inhalt das Speichers dargestellt. Die Darstellung der Speicheradressen ist dezimal, auf
+Wunsch auch hexadezimal; jeweils zehn Speicherzellen sind in einer Zeile angezeigt. Die Zellinhalte werden als ganze,
+vorzeichenbehaftete Dezimalzahlen, als ganze, vorzeichenlose Dezimalzahlen, als vorzeichenlose Hexadezimalzahlen
+oder als Opcodes interpretiert dargestellt; der Inhalt der jeweils zuletzt geänderten Zelle wird rot angezeigt.</p>
+<p>Bei Bedarf kann das Speicherfenster auch zum Verändern des Speichers verwendet werden. Die Aktivierung des 
+Editiermodus erfolgt über das Werkzeugmenü. Editiert wird durch Klick auf die gewünschte Zelle und
+Eingabe des neuen Wertes. Beim Verlassen der Zelle wird der (neue) Wert automatisch in den Speicher übernommen.</p>
+<p> Für das Speicherfenster ist vor allem das Werkzeuge-Menü wichtig.</p>
+<ul>
+<li>Das Werkzeuge-Menü erlaubt das Bearbeiten des Speichers
+	<ul>
+	<li>Speicher löschen: Belegt den Speicherinhalt mit 0-Werten</li>
+    <li>Darstellung: Aktiviert ein Untermenü mit den Optionen &quot;Zahl mit Vorzeichen&quot;, &quot;Zahl ohne Vorzeichen&quot;, &quot;Zahl hexadezimal&quot; und &quot;Opcodes anzeigen&quot;.</li>
+	<li>Speicher editieren: Aktiviert oder deaktiviert den Edtiermodus des Speicherfensters.</li>
+	</ul></li>
+</ul>
+<a name=lab7>
+<h2>2.7 Die Editor-Fenster</h2>
+<p align=center><img src="editor.png"></p>
+<p>Die Editorfenster dienen zur Eingabe von Assembler- oder Minisprachenprogrammen. Sie implementieren einen einfachen
+Editor, der die Zwischenablage unterstützt (Kopieren, Ausschneiden und Einfügen) sowie das Widerrufen
+und Wiederholen von Änderungen.<p>
+<p>Für die Editorfenster sind Menüpunkte aus allen Menüs verfügbar.</p>
+<ul>
+<li>Das Menü Ablage
+	<ul>
+	<li>Neu: öffnen eines neuen, leeren Editorfensters zur Programmeingabe</li>
+	<li>öffnen: öffnen einer bestehenden Datei in einem neuen Editorfenster</li>
+	<li>Schliessen: Schließen eines offenen Fensters, bei ungesicherten Änderungen wird nachgefragt.</li>
+	<li>Sichern: Der Fensterinhalt wird in die zugeordnete Datei gesichert, gegebenenfalls wird die Datei angelegt.</li>
+	<li>Sichern unter ...: Der Fensterinhalt wird in eine neu zuzuordnende Datei gesichert.</li>
+	<li>Drucken ...: Der Fensterinhalt wird gedruckt.</li>
+	</ul></li>
+<li>Das Bearbeiten-Menü mit seinen typischen Einträgen
+	<ul>
+	<li>Widerrufen: Nimmt die letzte Eingabe zurück.</li>
+	<li>Wiederholen: Wiederholt die zuletzt zurückgenommene Eingabe.</li>
+	<li>Einfügen: Fügt den Inhalt der Zwischenablage an der Cursorposition ein.</li>
+	<li>Kopieren: Kopiert den ausgewählten Bereich in die Zwischenablage.</li>
+	<li>Ausschneiden: Kopiert den ausgewählten Bereich in die Zwischenablage und löscht ihn im Fenster.</li>
+	<li>Alles auswählen: Der gesamte Fensterinhalt wird ausgewählt.</li>
+	</ul></li>
+<li>Das Werkzeuge-Menü
+	<ul>
+	<li>Fonts: Auswahl des Fonts für dieses Editorfenster.</li>
+	<li>Assemblieren: Löscht den Speicher und assembliert den Fensterinhalt; es muss sich um eine Assemblerquelle handeln.</li>
+	<li>Assemblieren und Speicher behalten: Assembliert den Fensterinhalt; es muss sich um eine Assemblerquelle handeln. Der Speicher wird nicht gelöscht</li>
+	<li>Übersetzen: Assembliert den Fensterinhalt; es muss sich um eine Minisprachenquelle handeln.</li>
+	<li>Assemblertext anzeigen: Zeigt die zum Fensterinhalt gehörende Assemblerquelle an; es muss sich um eine Minisprachenquelle handeln.</li>
+	</ul></li>
+</ul>
+<a name=lab8>
+<h2>2.8 Die Assembleranzeige-Fenster</h2>
+<p align=center><img src="anzeige.png"></p>
+<p>In den Assembleranzeige-Fenstern wird auf Wunsch der zu einem Minisprachenprogramm gehörende Assemblertext angezeigt.
+Diese Funktion ist speziell dafür vorgesehen, den Schülern zu zeigen, dass eine vollautomatische
+Übersetzung einer Hochsprachenquelle den strukturell gleichen Assemblertext ergibt, den Schüler „von Hand”
+erzeugt hätten.</p>
+<p>Assembleranzeige-Fenster haben keine speziell zugeordneten Menüs; die Editierfunktionen des Bearbeiten-Menüs
+sind verfügbar.</p>
+</body>
+</html>
