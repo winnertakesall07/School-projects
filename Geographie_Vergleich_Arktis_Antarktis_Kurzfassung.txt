@@ -14,9 +14,9 @@ HAUPTVERGLEICH: ARKTIS vs. ANTARKTIS
 ├─────────────────────────────────────┬───────────────────────────────────────┤
 │ ARKTIS                              │ ANTARKTIS                             │
 ├─────────────────────────────────────┼───────────────────────────────────────┤
-│ • Nordpol (90° N)                   │ • Südpol (90° S)                     │
-│ • Arktischer Ozean + Randgebiete    │ • Isolierter Kontinent               │
-│ • 8 angrenzende Staaten             │ • Keine angrenzenden Länder          │
+│ • Nordpol (90° N)                   │ • Südpol (90° S)                      │
+│ • Arktischer Ozean + Randgebiete    │ • Isolierter Kontinent                │
+│ • 8 angrenzende Staaten             │ • Keine angrenzenden Länder           │
 └─────────────────────────────────────┴───────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -24,9 +24,9 @@ HAUPTVERGLEICH: ARKTIS vs. ANTARKTIS
 ├─────────────────────────────────────┬───────────────────────────────────────┤
 │ ARKTIS                              │ ANTARKTIS                             │
 ├─────────────────────────────────────┼───────────────────────────────────────┤
-│ • Meereis (schwimmend)              │ • Kontinent (Gestein + Eis)          │
-│ • Eisdicke: 2-4 Meter               │ • Eisdicke: 2.000 Meter              │
-│ • Saisonal schwankend               │ • 90% des weltweiten Eises           │
+│ • Meereis (schwimmend)              │ • Kontinent (Gestein + Eis)           │
+│ • Eisdicke: 2-4 Meter               │ • Eisdicke: 2.000 Meter               │
+│ • Saisonal schwankend               │ • 90% des weltweiten Eises            │
 └─────────────────────────────────────┴───────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -34,9 +34,9 @@ HAUPTVERGLEICH: ARKTIS vs. ANTARKTIS
 ├─────────────────────────────────────┬───────────────────────────────────────┤
 │ ARKTIS                              │ ANTARKTIS                             │
 ├─────────────────────────────────────┼───────────────────────────────────────┤
-│ • Winter: -40°C bis -30°C           │ • Winter: bis -89,2°C (Rekord)       │
-│ • Sommer: 0°C bis +10°C             │ • Sommer: -15°C bis -30°C            │
-│ • Niederschlag: 200-500 mm          │ • Niederschlag: <50 mm (Wüste!)      │
+│ • Winter: -40°C bis -30°C           │ • Winter: bis -89,2°C (Rekord)        │
+│ • Sommer: 0°C bis +10°C             │ • Sommer: -15°C bis -30°C             │
+│ • Niederschlag: 200-500 mm          │ • Niederschlag: <50 mm (Wüste!)       │
 └─────────────────────────────────────┴───────────────────────────────────────┘
 
 
@@ -46,9 +46,9 @@ HAUPTVERGLEICH: ARKTIS vs. ANTARKTIS
 ├─────────────────────────────────────┬───────────────────────────────────────┤
 │ ARKTIS                              │ ANTARKTIS                             │
 ├─────────────────────────────────────┼───────────────────────────────────────┤
-│ • Eisbären, Polarfüchse             │ • Pinguine (keine Eisbären!)         │
-│ • Rentiere, Moschusochsen           │ • Keine Landsäugetiere               │
-│ • Robben, Walrosse, Wale            │ • Robben, Wale, Krill                │
+│ • Eisbären, Polarfüchse             │ • Pinguine (keine Eisbären!)          │
+│ • Rentiere, Moschusochsen           │ • Keine Landsäugetiere                │
+│ • Robben, Walrosse, Wale            │ • Robben, Wale, Krill                 │
 └─────────────────────────────────────┴───────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -56,8 +56,8 @@ HAUPTVERGLEICH: ARKTIS vs. ANTARKTIS
 ├─────────────────────────────────────┬───────────────────────────────────────┤
 │ ARKTIS                              │ ANTARKTIS                             │
 ├─────────────────────────────────────┼───────────────────────────────────────┤
-│ • Tundra: Moose, Flechten, Gräser   │ • Fast keine Vegetation              │
-│ • Niedrige Sträucher, Blütenpflanzen│ • Nur 2 Blütenpflanzenarten          │
+│ • Tundra: Moose, Flechten, Gräser   │ • Fast keine Vegetation               │
+│ • Niedrige Sträucher, Blütenpflanzen│ • Nur 2 Blütenpflanzenarten           │
 └─────────────────────────────────────┴───────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -65,8 +65,8 @@ HAUPTVERGLEICH: ARKTIS vs. ANTARKTIS
 ├─────────────────────────────────────┬───────────────────────────────────────┤
 │ ARKTIS                              │ ANTARKTIS                             │
 ├─────────────────────────────────────┼───────────────────────────────────────┤
-│ • ~4 Mio. Menschen permanent        │ • Unbewohnt                          │
-│ • Indigene Völker, Städte           │ • Nur Forschungsstationen            │
+│ • ~4 Mio. Menschen permanent        │ • Unbewohnt                           │
+│ • Indigene Völker, Städte           │ • Nur Forschungsstationen             │
 └─────────────────────────────────────┴───────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -74,8 +74,8 @@ HAUPTVERGLEICH: ARKTIS vs. ANTARKTIS
 ├─────────────────────────────────────┬───────────────────────────────────────┤
 │ ARKTIS                              │ ANTARKTIS                             │
 ├─────────────────────────────────────┼───────────────────────────────────────┤
-│ • Territoriale Ansprüche anerkannt  │ • Antarktisvertrag (1961)            │
-│ • Rohstoffförderung aktiv           │ • Keine Rohstoffausbeutung           │
+│ • Territoriale Ansprüche anerkannt  │ • Antarktisvertrag (1961)             │
+│ • Rohstoffförderung aktiv           │ • Keine Rohstoffausbeutung            │
 └─────────────────────────────────────┴───────────────────────────────────────┘
 
 
