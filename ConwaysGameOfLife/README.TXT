@@ -8,14 +8,14 @@ HOW TO RUN IN BLUEJ:
    (This opens the launcher to choose a game)
 
    OR right-click "GameOfLife" class → void main(String[] args) → OK
-   OR right-click "TicTacToe"  class → void main(String[] args) → OK
+   OR right-click "TicTacToeGoL" class → void main(String[] args) → OK
 
 HOW TO COMPILE FROM TERMINAL:
   cd ConwaysGameOfLife
   javac *.java
-  java Main         # launcher
-  java GameOfLife   # directly run GoL
-  java TicTacToe    # directly run Tic-Tac-Toe
+  java Main           # launcher
+  java GameOfLife     # directly run GoL
+  java TicTacToeGoL   # directly run GoL Tic-Tac-Toe
 
 GAME CONTROLS — Conway's Game of Life:
   ▶ Start     — start the simulation
@@ -34,19 +34,19 @@ PRESET PATTERNS:
   • Blinker         — simplest period-2 oscillator
   • Beacon          — period-2 oscillator
 
-GAME CONTROLS — Tic-Tac-Toe:
-  Click a cell to place your X
-  The AI (O) responds with minimax — it is unbeatable
-  New Game button resets the board
-  Background shows a live GoL animation
+GAME CONTROLS — Tic-Tac-Toe on GoL:
+  Two human players (X and O) take turns clicking squares
+  X pieces appear as a coral cross pattern of GoL cells
+  O pieces appear as a gold ring pattern of GoL cells
+  GoL evolves freely in all empty squares (living background)
+  Win/draw is detected and shown in the status bar
+  New Game button resets the grid and randomises the background
 
 CLASSES:
-  Main.java           — Launcher window
-  GameOfLife.java     — GoL main entry point
-  GameOfLifeBoard.java — Grid logic & GoL rules (B3/S23)
-  GameOfLifeGUI.java  — Swing GUI for GoL
-  Pattern.java        — Preset pattern definitions
-  TicTacToe.java      — Tic-Tac-Toe main entry point
-  TicTacToeBoard.java — Game logic & win detection
-  TicTacToeGUI.java   — GoL-themed Tic-Tac-Toe GUI
-  MinimaxAI.java      — Unbeatable minimax AI with alpha-beta pruning
+  Main.java             — Launcher window
+  GameOfLife.java       — GoL main entry point
+  GameOfLifeBoard.java  — Grid logic & GoL rules (B3/S23)
+  GameOfLifeGUI.java    — Swing GUI for GoL
+  Pattern.java          — Preset pattern definitions
+  TicTacToeGoL.java     — Tic-Tac-Toe (GoL edition) entry point
+  TicTacToeGoLGUI.java  — 63×63 GoL grid with Tic-Tac-Toe overlay
