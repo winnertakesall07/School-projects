@@ -84,13 +84,10 @@ public class Main {
         panel.add(golBtn, gbc);
 
         gbc.gridy++;
-        JButton tttBtn = makeBigButton("▶  Tic-Tac-Toe  (GoL Computer)");
+        JButton tttBtn = makeBigButton("▶  Play Tic-Tac-Toe (inside GoL)");
         tttBtn.addActionListener(e -> {
             frame.dispose();
-            SwingUtilities.invokeLater(() -> {
-                TicTacToeGUI gui = new TicTacToeGUI();
-                gui.setVisible(true);
-            });
+            TicTacToeGoL.main(null);
         });
         panel.add(tttBtn, gbc);
 
@@ -100,7 +97,7 @@ public class Main {
             frame.dispose();
             SwingUtilities.invokeLater(() -> {
                 new GameOfLifeGUI().setVisible(true);
-                new TicTacToeGUI().setVisible(true);
+                new TicTacToeGoLGUI();
             });
         });
         panel.add(bothBtn, gbc);
