@@ -5,9 +5,14 @@ import java.awt.event.*;
 import java.util.*;
 
 /**
- * Improved Conway's Game of Life GUI (v2).
+ * Improved Conway's Game of Life GUI (v3).
  *
- * New features over v1:
+ * New features over v2:
+ *  - TicTacToe Computer pattern: place the "TicTacToe Computer (GoL)" pattern
+ *    to activate an interactive tic-tac-toe game on the GoL board, with walls
+ *    and piece cells pinned so the grid structure survives GoL evolution.
+ *
+ * Features carried over from v2:
  *  - Infinite (sparse) board — the board never has a fixed edge.
  *  - Zoom in/out with the mouse wheel (or toolbar buttons), from 1 px/cell
  *    to 64 px/cell.  At 1 px/cell a typical HD screen shows ~2000 × 1100
@@ -129,7 +134,7 @@ public class GameOfLifeGUI extends JFrame {
     // ─────────────────────────────────────────────────────────────────────────
 
     private void initUI() {
-        setTitle("Conway's Game of Life  v2");
+        setTitle("Conway's Game of Life  v3");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBackground(COLOR_BG);
         getContentPane().setBackground(COLOR_BG);
