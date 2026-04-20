@@ -1,0 +1,54 @@
+============================================================
+  HOW TO ADD SOUNDS TO THE JEOPARDY GAME
+============================================================
+
+Place your audio files in THIS folder (sounds/) and name
+them EXACTLY as listed below. The game works fine without
+any sounds – they are all optional.
+
+  background.wav  →  Looping background music
+                     (plays quietly throughout the game)
+
+  question.wav    →  Short sound when a tile is clicked
+                     (e.g. a "swoosh" or soft chime)
+
+  correct.wav     →  Fanfare for a correct answer
+                     (e.g. trumpet sting, "ding" sound)
+
+  wrong.wav       →  Buzzer for wrong / no answer
+                     (e.g. classic game-show buzzer)
+
+  reveal.wav      →  Sound when the answer is revealed
+                     (e.g. subtle "reveal" chime)
+
+  winner.wav      →  Triumphant fanfare at game end
+                     (e.g. full victory jingle)
+
+------------------------------------------------------------
+  FREE SOUND SOURCES
+------------------------------------------------------------
+
+  https://freesound.org          (free account required)
+  https://mixkit.co/free-sound-effects/
+  https://zapsplat.com           (free account required)
+  https://pixabay.com/sound-effects/
+
+  Recommended searches:
+    • "jeopardy theme" or "game show music" for background
+    • "correct answer fanfare" for correct.wav
+    • "game show buzzer" for wrong.wav
+    • "victory fanfare" for winner.wav
+
+------------------------------------------------------------
+  CONVERTING MP3 → WAV (if needed)
+------------------------------------------------------------
+
+  Java's built-in audio only supports WAV format.
+  Use Audacity (free, open-source) to convert:
+    1. Open Audacity → File → Open your MP3
+    2. File → Export → Export as WAV
+    3. Choose "16-bit PCM" when asked
+
+  Or use an online converter: https://cloudconvert.com/mp3-to-wav
+
+============================================================
