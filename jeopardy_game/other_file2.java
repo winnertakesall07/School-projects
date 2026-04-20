@@ -1,0 +1,1 @@
+// Java code content for other_file2.
