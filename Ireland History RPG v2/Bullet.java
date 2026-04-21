@@ -12,7 +12,6 @@ public class Bullet {
     private final float dx, dy;
     private final int   damage;
     public  final boolean fromPlayer;
-    private boolean active = true;
 
     private static final int   RADIUS = 4;
     private static final float SPEED  = 8.5f;
@@ -50,7 +49,6 @@ public class Bullet {
 
     // ── Rendering ─────────────────────────────────────────────────────────────
     public void draw(Graphics2D g) {
-        if (!active) return;
         // Trail dot
         g.setColor(trailColor);
         g.fillOval((int)(x - dx - RADIUS / 2f), (int)(y - dy - RADIUS / 2f), RADIUS, RADIUS);
@@ -80,7 +78,5 @@ public class Bullet {
     }
 
     // ── State ─────────────────────────────────────────────────────────────────
-    public void    deactivate() { active = false; }
-    public boolean isActive()   { return active; }
-    public int     getDamage()  { return damage; }
+    public int getDamage()  { return damage; }
 }

@@ -46,9 +46,8 @@ public class KeyHandler implements KeyListener, MouseMotionListener, MouseListen
         if (code == KeyEvent.VK_LEFT  || code == KeyEvent.VK_A) leftPressed  = false;
         if (code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_D) rightPressed = false;
         if (code == KeyEvent.VK_SPACE)  spaceHeld    = false;
-        if (code == KeyEvent.VK_ENTER)  enterPressed = false;
-        if (code == KeyEvent.VK_ESCAPE) escPressed   = false;
-        if (code == KeyEvent.VK_P)      pausePressed = false;
+        // enterPressed, escPressed, pausePressed are one-shot flags consumed by
+        // GamePanel after being acted upon; do not clear them on key-release.
     }
 
     @Override public void keyTyped(KeyEvent e) {}

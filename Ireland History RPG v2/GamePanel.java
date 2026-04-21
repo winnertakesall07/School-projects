@@ -497,7 +497,9 @@ public class GamePanel extends JPanel implements Runnable {
         int barY     = SCREEN_HEIGHT - 52;
         int cooldown  = player.getAttackCooldown();
         int remaining = player.getAttackTimer();
-        int filled    = (int)((1f - (float) remaining / cooldown) * barFullW);
+        int filled    = cooldown > 0
+                ? (int)((1f - (float) remaining / cooldown) * barFullW)
+                : barFullW;
         g.setColor(new Color(60, 60, 60));
         g.fillRect(barX, barY, barFullW, barH);
         Color barColor = player.getChapter() == 0
