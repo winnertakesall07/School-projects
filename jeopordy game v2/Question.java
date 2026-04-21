@@ -1,7 +1,7 @@
 /**
  * Question - Represents a single Jeopardy question and its answer.
  *
- * To customize questions, open JeopardyGame.java and edit the
+ * To customize questions, open JeopardyGameV2.java and edit the
  * initializeQuestions() method. Each question is created with:
  *
  *   new Question("Your question text here", "The correct answer here")
