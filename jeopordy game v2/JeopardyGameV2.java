@@ -292,20 +292,19 @@ public class JeopardyGameV2 extends JFrame {
         return board;
     }
 
-    private JButton makeCategoryHeader(String text) {
-        JButton btn = new JButton(
-                "<html><center><b>" + text.replace("\n", "<br>") + "</b></center></html>");
-        btn.setFont(new Font("Arial", Font.BOLD, 14));
-        btn.setForeground(C_WHITE);
-        btn.setBackground(new Color(0, 0, 100));
-        btn.setBorder(BorderFactory.createCompoundBorder(
+    private JLabel makeCategoryHeader(String text) {
+        JLabel lbl = new JLabel(
+                "<html><center><b>" + text.replace("\n", "<br>") + "</b></center></html>",
+                SwingConstants.CENTER);
+        lbl.setFont(new Font("Arial", Font.BOLD, 14));
+        lbl.setForeground(C_WHITE);
+        lbl.setBackground(new Color(0, 0, 100));
+        lbl.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(C_GOLD, 2),
                 BorderFactory.createEmptyBorder(4, 6, 4, 6)));
-        btn.setEnabled(false);
-        btn.setPreferredSize(new Dimension(185, 72));
-        btn.setFocusPainted(false);
-        btn.setOpaque(true);
-        return btn;
+        lbl.setPreferredSize(new Dimension(185, 72));
+        lbl.setOpaque(true);
+        return lbl;
     }
 
     private JButton makeQuestionCell(final int col, final int row) {
