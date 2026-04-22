@@ -355,7 +355,7 @@ public class Enemy {
         g.fillOval(ex + SIZE / 4, ey + 3, SIZE / 2, SIZE / 2 - 2);
 
         // Weapon / role indicator
-        if (subType == SubType.RANGED || subType == SubType.COMMANDER && chapterType > 0) {
+        if (subType == SubType.RANGED || (subType == SubType.COMMANDER && chapterType > 0)) {
             g.setColor(new Color(80, 60, 40));
             g.setStroke(new BasicStroke(3));
             g.drawLine(ex + SIZE / 2, ey + SIZE / 2, ex + SIZE + 12, ey + SIZE / 2);
