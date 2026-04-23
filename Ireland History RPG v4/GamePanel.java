@@ -607,15 +607,29 @@ public class GamePanel extends JPanel implements Runnable {
     /** Find a spawn position that does not overlap any cover object. */
     private int[] findValidSpawn(int ex, int ey, int entitySize) {
         if (!isInsideCover(ex, ey, entitySize)) return new int[]{ex, ey};
-        // Try random offsets up to 20 attempts
-        for (int attempt = 0; attempt < 20; attempt++) {
-            int nx = ex + rng.nextInt(220) - 110;
-            int ny = ey + rng.nextInt(220) - 110;
+        // First pass: random offsets within ±250 (handles mid-sized buildings)
+        for (int attempt = 0; attempt < 30; attempt++) {
+            int nx = ex + rng.nextInt(500) - 250;
+            int ny = ey + rng.nextInt(500) - 250;
             nx = Math.max(0, Math.min(Camera.WORLD_WIDTH  - entitySize, nx));
             ny = Math.max(0, Math.min(Camera.WORLD_HEIGHT - entitySize, ny));
             if (!isInsideCover(nx, ny, entitySize)) return new int[]{nx, ny};
         }
-        return new int[]{ex, ey}; // fallback — rare
+        // Second pass: wider random offsets within ±500 (handles large buildings like barracks/GPO)
+        for (int attempt = 0; attempt < 30; attempt++) {
+            int nx = ex + rng.nextInt(1000) - 500;
+            int ny = ey + rng.nextInt(1000) - 500;
+            nx = Math.max(0, Math.min(Camera.WORLD_WIDTH  - entitySize, nx));
+            ny = Math.max(0, Math.min(Camera.WORLD_HEIGHT - entitySize, ny));
+            if (!isInsideCover(nx, ny, entitySize)) return new int[]{nx, ny};
+        }
+        // Final fallback: scan the world in a grid to find any open cell
+        for (int gx = entitySize; gx < Camera.WORLD_WIDTH  - entitySize; gx += entitySize * 2) {
+            for (int gy = entitySize; gy < Camera.WORLD_HEIGHT - entitySize; gy += entitySize * 2) {
+                if (!isInsideCover(gx, gy, entitySize)) return new int[]{gx, gy};
+            }
+        }
+        return new int[]{ex, ey}; // should never reach here on a normal map
     }
 
     private boolean isInsideCover(int ex, int ey, int entitySize) {
@@ -657,7 +671,8 @@ public class GamePanel extends JPanel implements Runnable {
         for (int i = 0; i < count; i++) {
             int ax = baseX + (i % 3) * stepX + rng.nextInt(20) - 10;
             int ay = baseY + (i / 3) * stepY + rng.nextInt(20) - 10;
-            allies.add(new Ally(ax, ay, chapter, sub));
+            int[] safe = findValidSpawn(ax, ay, Ally.SIZE);
+            allies.add(new Ally(safe[0], safe[1], chapter, sub));
         }
     }
 
