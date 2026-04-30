@@ -1,4 +1,4 @@
-# Conway's Game of Life v2 – Wochenberichte
+# Conway's Game of Life v4 – Wochenberichte
 
 > Alle Wochenberichte werden in diesem Dokument gesammelt.
 

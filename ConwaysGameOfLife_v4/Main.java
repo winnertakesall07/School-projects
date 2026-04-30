@@ -59,7 +59,7 @@ public class Main {
         panel.add(artPanel, gbc);
 
         gbc.gridy++;
-        JLabel subtitle = new JLabel("[ COMPUTER — GAME LAUNCHER  v3 ]", SwingConstants.CENTER);
+        JLabel subtitle = new JLabel("[ COMPUTER — GAME LAUNCHER  v4 ]", SwingConstants.CENTER);
         subtitle.setFont(new Font("Monospaced", Font.BOLD, 13));
         subtitle.setForeground(FG_DIM);
         panel.add(subtitle, gbc);
@@ -71,7 +71,7 @@ public class Main {
         panel.add(sep, gbc);
 
         gbc.gridy++;
-        JButton golBtn = makeBigButton("▶  Conway's Game of Life  (v3 — Turing Machine pattern)");
+        JButton golBtn = makeBigButton("▶  Conway's Game of Life  (v4 — extended zoom, turbo speed)");
         golBtn.addActionListener(e -> {
             frame.dispose();
             SwingUtilities.invokeLater(() -> new GameOfLifeGUI().setVisible(true));
