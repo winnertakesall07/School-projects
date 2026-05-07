@@ -401,9 +401,9 @@ public class Pattern {
             } else if (ch == '.' || ch == 'b' || ch == 'B') {
                 x += (runLen == 0 ? 1 : runLen);
                 runLen = 0;
-            } else if (ch == 'O'
+            } else if (ch == 'o' || ch == 'O'
                     || (ch >= 'A' && ch <= 'Z')
-                    || ((ch >= 'a' && ch <= 'z') && ch != 'b')) {
+                    || (ch >= 'a' && ch <= 'z')) {
                 int count = (runLen == 0 ? 1 : runLen);
                 for (int k = 0; k < count; k++) {
                     coords.add(new int[]{x, y});
