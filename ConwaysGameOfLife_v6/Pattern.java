@@ -403,7 +403,7 @@ public class Pattern {
                 runLen = 0;
             } else if (ch == 'o' || ch == 'O'
                     || (ch >= 'A' && ch <= 'Z')
-                    || ((ch >= 'a' && ch <= 'z') && ch != 'b')) {
+                    || ((ch >= 'a' && ch <= 'z') && ch != 'b' && ch != 'o')) {
                 int count = (runLen == 0 ? 1 : runLen);
                 for (int k = 0; k < count; k++) {
                     coords.add(new int[]{x, y});
