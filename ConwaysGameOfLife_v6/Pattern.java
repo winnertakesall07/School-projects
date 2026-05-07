@@ -385,8 +385,8 @@ public class Pattern {
 
     /**
      * Parse an RLE-encoded cell string (without header) into a Pattern.
-     * Supports classic RLE ('b' dead, 'o' alive), dot-dead variants ('.'),
-     * and LifeHistory-style letters where any letter except 'b' is treated as
+     * Supports classic RLE ('b'/'B' dead, 'o'/'O' alive), dot-dead variants ('.'),
+     * and LifeHistory-style letters where any letter except 'b'/'B' is treated as
      * alive. '$' ends a row; '!' ends the pattern; digits are run-length
      * prefixes.
      */
@@ -401,9 +401,9 @@ public class Pattern {
             } else if (ch == '.' || ch == 'b' || ch == 'B') {
                 x += (runLen == 0 ? 1 : runLen);
                 runLen = 0;
-            } else if (ch == 'o' || ch == 'O'
+            } else if (ch == 'O'
                     || (ch >= 'A' && ch <= 'Z')
-                    || ((ch >= 'a' && ch <= 'z') && ch != 'b' && ch != 'o')) {
+                    || ((ch >= 'a' && ch <= 'z') && ch != 'b')) {
                 int count = (runLen == 0 ? 1 : runLen);
                 for (int k = 0; k < count; k++) {
                     coords.add(new int[]{x, y});
