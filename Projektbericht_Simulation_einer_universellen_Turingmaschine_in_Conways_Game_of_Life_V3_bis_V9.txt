@@ -1,0 +1,163 @@
+Projektbericht
+Simulation einer universellen Turingmaschine in Java innerhalb von Conways Game of Life
+Bezugsrahmen ConwaysGameOfLife_v3 bis ConwaysGameOfLife_v9
+
+1. Ausführliche Dokumentation
+
+1.1 Verlauf des Projekts
+Das Projekt verfolgt das Ziel, eine universelle Berechnung in einem zellulären Automaten sichtbar und bedienbar zu machen. Die technische Grundlage ist eine Java Anwendung mit grafischer Oberfläche. Die fachliche Grundlage ist Conways Game of Life mit unendlichem Spielfeld und diskreter Zeitsimulation.
+
+Der Entwicklungsverlauf von v3 bis v9 zeigt eine klare Systematik.
+In v3 wurde die Grundlage für das Turingmaschinen Thema direkt integriert. Die Anwendung konnte ein großes RLE Muster aus turingmaschine.txt laden und als platzierbares Pattern verwenden.
+In v4 wurde die Beobachtbarkeit deutlich erweitert. Die Zoomtiefe wurde stark erhöht und für die Turingmaschine kamen markierte Eingabe und Ausgabe Bereiche als Overlay hinzu.
+In v5 wurde die Leistungsfähigkeit strukturell verbessert. Die Simulation wurde in einen eigenen Thread ausgelagert, die Anzeige in einen getrennten Takt überführt und die Rechenlogik für große Populationen parallelisiert.
+In v6 wurde diese Architektur stabil weitergeführt und das Pattern turingmaschineV2.txt als Hauptvariante verwendet.
+In v7 kamen mehrere Maschinenvarianten hinzu, konkret v1, v2 und v3 mit eigener Auswahl im Pattern Menü.
+In v8 wurde ein Guidebook Tab integriert sowie ein Blueprint Modus, der beim Platzieren der Maschine zusätzliche Strukturinformationen zeigt.
+In v9 wurde zusätzlich ein Clock v1 Muster integriert und die Snapshot Logik für große Zustände effizienter gestaltet.
+
+1.2 Anschauliche Darstellung des Arbeitsfortschritts
+Der Fortschritt lässt sich über drei Achsen erklären.
+Erste Achse, fachliche Tiefe. Die Entwicklung geht von einem einzelnen Turingmaschinen Muster zu mehreren Varianten und zu einer zusätzlichen Clock Komponente.
+Zweite Achse, Bedienbarkeit. Die Oberfläche enthält Statusfelder, Zoom, Pan, Pattern Vorschau, Platzierungsmodus, Guidebook und Blueprint Schalter.
+Dritte Achse, technische Tragfähigkeit. Die Rechenlogik skaliert durch parallele Ausführung, getrennte Simulations und Darstellungsabläufe und optimierte Datenstrukturen für große Populationen.
+
+1.3 Reflexion
+Die zentrale Stärke des Projekts liegt in der Verbindung von Theorie und praktischer Visualisierung. Eine abstrakte Aussage wie Turing Vollständigkeit wird nicht nur behauptet, sondern als operatives Muster in einer laufenden Simulation gezeigt.
+
+Eine zweite Stärke ist die iterative Verbesserung. Jede Version adressiert ein klar erkennbares Problem, entweder Beobachtbarkeit, Geschwindigkeit oder didaktische Nachvollziehbarkeit.
+
+Eine Grenze des Projekts liegt in der Komplexität der sehr großen Muster. Auch mit optimierter Implementierung bleibt die Interpretation ohne strukturierte Hilfen anspruchsvoll. Genau hier sind Guidebook und Blueprint funktional wichtig.
+
+Für eine nächste Ausbaustufe wäre eine integrierte Messreihe sinnvoll, zum Beispiel automatische Protokolle für Generationen pro Sekunde, Populationsverlauf und Ereignismarker für definierte Signalpfade.
+
+1.4 Beschreibung der Phasen
+Phase A, Planung
+Festlegung des Ziels, eine universelle Turingmaschine als Pattern in eine steuerbare Java Simulation einzubetten. Definition der notwendigen Kernfunktionen, unendliches Board, Pattern Import, interaktive Platzierung, reproduzierbare Steuerung.
+
+Phase B, Modellierung
+Abbildung des Spielfelds als sparse Datenstruktur mit kodierten Koordinaten in einem Long Schlüssel. Trennung von Modell und Darstellung. Festlegung von Pattern als benannte Mengen relativer Koordinaten mit optionalen Regionsinformationen.
+
+Phase C, Implementierung
+Schrittweiser Ausbau von v3 bis v9. Integration der RLE Dateien, Ausbau der GUI, Einführung von Overlays, Erweiterung um mehrere Maschinenvarianten, Einführung von Guidebook und Blueprint, zusätzliche Clock Variante.
+
+Phase D, Test und Validierung
+Kompilation aller relevanten Versionen mit javac. Manuelle Funktionsprüfung der Kernabläufe, Pattern Auswahl, Platzierung, Start Stopp Schritt, Zoom Pan, Statusanzeigen.
+
+Phase E, Bewertung
+Bewertung nach Kriterien aus dem Informatikunterricht, Korrektheit, Nachvollziehbarkeit, Skalierbarkeit und didaktischer Mehrwert. Ergebnis, das Projekt erfüllt die Zielsetzung mit nachvollziehbarer Entwicklungslinie.
+
+2. Ziel des Projekts
+Das Projektziel ist die Simulation einer universellen Turingmaschine in Java innerhalb von Conways Game of Life. Daraus folgen vier Teilziele.
+Erstens, mathematisches Konzept in ein lauffähiges Softwareartefakt überführen.
+Zweitens, eine interaktive Oberfläche bereitstellen, damit Zustände beobachtet und manipuliert werden können.
+Drittens, Leistungsreserven schaffen, damit große Muster über viele Generationen stabil berechnet werden.
+Viertens, die interne Struktur der Maschine didaktisch sichtbar machen.
+
+3. Tutorial
+Schritt 1
+Im gewünschten Versionsordner arbeiten, zum Beispiel ConwaysGameOfLife_v9.
+
+Schritt 2
+Kompilieren mit javac *.java.
+
+Schritt 3
+Starten mit java Main.
+
+Schritt 4
+In der Oberfläche das gewünschte Pattern wählen, zum Beispiel Turing Machine v2 oder Clock v1.
+
+Schritt 5
+Place wählen, Vorschau auf dem Spielfeld positionieren, mit linker Maustaste platzieren.
+
+Schritt 6
+Simulation mit Start aktivieren. Mit Stop anhalten. Mit Step einzelne Generationen berechnen.
+
+Schritt 7
+Mit Mausrad zoomen und mit rechter Maustaste verschieben. Statusfelder für Generation, Population und Rate beobachten.
+
+Schritt 8
+In v8 und v9 optional den Guidebook Tab lesen. Blueprint einschalten, um Strukturbereiche der Maschine beim Platzieren sichtbar zu machen.
+
+4. Beschreibung wichtiger Codes und Methoden
+4.1 GameOfLifeBoard
+Die Klasse modelliert das unendliche Board als Menge lebender Zellen.
+Zentrale Methode key(x,y) kodiert zwei Integer Koordinaten in einen Long Wert.
+nextGeneration berechnet den Folgezustand über Nachbarzählung und Regelanwendung.
+Ab v5 existiert eine Schwelle für parallele Verarbeitung großer Populationen.
+
+4.2 Pattern
+Die Klasse kapselt benannte Koordinatenmuster.
+fromRleFile und fromRle laden und parsen RLE Daten.
+Für Turingmaschinen werden zusätzliche Regionen bereitgestellt, zunächst Input und Output, später im Blueprint Modus deutlich feinere Bereichsaufteilungen für v2.
+
+4.3 GameOfLifeGUI
+Die Klasse enthält Steuerung, Darstellung und Interaktion.
+Relevante Methoden sind initUI, createToolbar, buildPatternList, onDisplayTick, takeSnapshot und die Eingabeverarbeitung für Maus und Tastatur.
+Ab v5 ist die Simulation vom Darstellungszyklus getrennt. Dadurch bleibt die Oberfläche responsiv, auch bei hoher Rechenlast.
+
+4.4 Main
+Die Klasse startet den Launcher und öffnet die Simulation. In frühen Versionen existierte zusätzlich die Verbindung zu einem TicTacToe Teilprojekt. Spätere Versionen fokussieren sich vollständig auf das Game of Life Modul.
+
+5. Veranschaulichungen
+Für die Abgabe sind folgende Abbildungen sinnvoll.
+Abbildung 1, Gesamtansicht der Oberfläche mit geladenem Turing Pattern.
+Abbildung 2, Blueprint Overlays in v8 oder v9 mit beschrifteten Funktionsbereichen.
+Abbildung 3, Statusanzeige mit Generation, Population und gemessener Rate bei hoher Geschwindigkeit.
+Abbildung 4, Vergleich von v3 und v9 bezüglich Bedienkomfort und Informationsdichte.
+Abbildung 5, Sequenz aus mehreren Generationen zur Beobachtung eines Signalverlaufs.
+
+6. Verteilung der Arbeit
+Die Arbeit lässt sich in Rollen aufteilen, auch wenn sie von einer Person umgesetzt wurde.
+Rolle Architektur und Modellierung
+Definition von Datenstruktur, Regelwerk und Thread Struktur.
+
+Rolle Implementierung
+Programmierung der Klassen GameOfLifeBoard, Pattern, GameOfLifeGUI, Main und Einbindung der RLE Dateien.
+
+Rolle Test und Qualität
+Kompilationsprüfungen, manuelle Bedien und Funktionsprüfungen, Performancebeobachtung.
+
+Rolle Dokumentation
+Aufbereitung von Entwicklungsweg, methodischer Begründung, Tutorial und Reflexion.
+
+7. Software
+Programmiersprache Java
+GUI Bibliothek Swing
+Datenformate Textdateien mit RLE Inhalten, zum Beispiel turingmaschine.txt, turingmaschineV2.txt, turingmaschineV3.txt, clockV1.txt
+Entwicklungsumgebung BlueJ kompatible Projektstruktur, zusätzlich kompilierbar per javac
+Versionsstände ConwaysGameOfLife_v3 bis ConwaysGameOfLife_v9
+
+8. Quellen und Hilfsmittel
+Quellen im Repository
+ConwaysGameOfLife_v3 bis ConwaysGameOfLife_v9, insbesondere GameOfLifeBoard.java, Pattern.java, GameOfLifeGUI.java, Main.java
+Turing und Clock Musterdateien in den jeweiligen Versionsordnern
+
+Fachliche Grundlagen
+Regelwerk von Conways Game of Life
+Theorie der universellen Turingmaschine und Turing Vollständigkeit
+RLE Konvention zur Speicherung von Life Mustern
+
+Methodische Hilfsmittel
+Schrittweise Versionierung der Lösung
+Kompilation und Laufzeittests in jeder relevanten Version
+Vergleichende Bewertung der Versionen nach Funktion, Leistung und Verständlichkeit
+
+Nachweis der geforderten Kompetenzen
+Systematisch denken
+Durch die Trennung in Modell, Simulation, Darstellung und Interaktion.
+
+Planen
+Durch die stufenweise Erweiterung von v3 bis v9 mit klaren Zwischenzielen.
+
+Modellieren
+Durch die Abbildung unendlicher Zellräume auf effiziente Schlüsselstrukturen und durch formale Pattern Modelle.
+
+Implementieren
+Durch die konkrete Umsetzung der Klassen, Methoden und Interaktionsabläufe.
+
+Testen
+Durch wiederholte Kompilation, manuelle Szenarien und Laufzeitbeobachtung bei unterschiedlichen Lasten.
+
+Bewerten
+Durch Reflexion über Leistungsgrenzen, Bedienbarkeit und didaktischen Nutzen sowie durch den Versionsvergleich.
