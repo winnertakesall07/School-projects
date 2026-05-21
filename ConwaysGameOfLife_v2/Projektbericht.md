@@ -10,7 +10,7 @@
 |---|---|---|
 | Kurzanleitung für Bedienung und Features direkt im v2-Ordner ergänzen | Überarbeitung der UI-Details (Lesbarkeit, Konsistenz der Labels) | Conway Game of Life v2 mit unendlichem Board umgesetzt |
 | Stabilität bei größeren Mustern/Zoomstufen manuell testen | Manuelle Testläufe für Pattern-Platzierung | Zoom (inkl. Mausrad), Pan und Center-Funktion eingebaut |
-| Struktur für kommende Wochenberichte weiterführen | Vorbereitung nächster Funktionsverbesserungen | Launcher für Spielauswahl erstellt (GoL / Tic-Tac-Toe / beide) |
+| Struktur für kommende Wochenberichte weiterführen | Vorbereitung nächster Funktionsverbesserungen | Direkter Start von Conway Game of Life v2 bereitgestellt |
 |  |  | Mehrere Pattern-Kategorien integriert (Still Lifes, Oscillators, Spaceships, Gun, Methuselahs) |
 
 ### Was haben wir bisher gemacht?
@@ -19,7 +19,7 @@
 - Kernfunktionen des Conway-Spiels erweitert (unendliches/sparsames Board, Simulation, Statusanzeigen).
 - Bedienung deutlich verbessert (Start/Stop/Step/Reset/Random, Speed-Slider, Zoom, Pan, Center).
 - Pattern-System ausgebaut und Platzierungsmodus mit Vorschau ergänzt.
-- Launcher und die Tic-Tac-Toe-Integration im GoL-Kontext verbunden.
+- Startpunkt für Conway Game of Life v2 bereinigt und vereinfacht.
 
 ### Was machen wir in der Zukunft?
 
