@@ -1,0 +1,60 @@
+Übersicht: Betriebssysteme allgemein und am Beispiel macOS (Q12, Bayern Gymnasium)
+
+1) Allgemeine Informationen
+Betriebssysteme (Operating Systems, OS) sind die grundlegende Systemsoftware eines Computers. Sie verwalten Hardware-Ressourcen (z. B. Prozessor, Arbeitsspeicher, Festplatte), stellen Schnittstellen für Programme bereit und ermöglichen die Interaktion mit Nutzerinnen und Nutzern. Bekannte Beispiele sind Windows, Linux, Android, iOS und macOS.
+
+2) Historische Entwicklung
+Die ersten Betriebssysteme entstanden in der Frühzeit der Großrechner und konnten meist nur einzelne Aufgaben nacheinander abarbeiten. Mit der Zeit kamen Mehrprogrammbetrieb, grafische Oberflächen und Netzwerkfunktionen hinzu. Apple entwickelte aus NeXTSTEP und UNIX-Grundlagen das heutige macOS, das seit 2001 als modernes Desktop-Betriebssystem weiterentwickelt wird.
+
+3) Technische Grundlagen
+Ein Betriebssystem besteht aus mehreren Kernbereichen:
+- Kernel: steuert Hardwarezugriffe und zentrale Abläufe.
+- Prozessverwaltung: organisiert laufende Programme.
+- Speicherverwaltung: weist RAM zu und schützt Speicherbereiche.
+- Dateisystem: strukturiert Daten auf Speichermedien.
+- Treibersystem: bindet Geräte wie Drucker, Grafikkarten oder Eingabegeräte ein.
+macOS basiert auf Darwin (XNU-Kernel) mit UNIX/POSIX-Elementen und kombiniert damit Stabilität, Mehrbenutzerkonzepte und moderne Systemdienste.
+
+4) Benutzeroberfläche
+Moderne Betriebssysteme bieten meist eine grafische Benutzeroberfläche (GUI) mit Fenstern, Symbolen und Menüs. macOS nutzt die Oberfläche "Aqua" mit Dock, Finder und Menüleiste. Zusätzlich gibt es das Terminal für die textbasierte Arbeit mit Shell-Befehlen.
+
+5) Typische Einsatzbereiche
+- Windows: weit verbreitet in Unternehmen, Gaming und allgemeinem Desktop-Einsatz.
+- Linux: Server, Entwicklung, wissenschaftliche Systeme, eingebettete Systeme.
+- macOS: Kreativbereiche (Design, Musik, Video), Softwareentwicklung (z. B. iOS-Apps), Bildung und produktive Office-Nutzung.
+
+6) Sicherheit
+Betriebssysteme nutzen verschiedene Sicherheitsmechanismen:
+- Benutzerkonten und Rechteverwaltung
+- Verschlüsselung
+- Firewall und Netzwerkfilter
+- Regelmäßige Sicherheitsupdates
+macOS setzt zusätzlich auf Funktionen wie Gatekeeper, XProtect, System Integrity Protection (SIP) und FileVault-Verschlüsselung. Trotzdem ist kein System vollkommen sicher; sicheres Nutzerverhalten bleibt wichtig.
+
+7) Vor- und Nachteile
+Vorteile von Betriebssystemen allgemein:
+- Ermöglichen standardisierte Nutzung von Hardware
+- Erleichtern Softwareentwicklung durch APIs
+- Bieten Komfort durch GUI und Automatisierung
+
+Nachteile bzw. Herausforderungen:
+- Komplexität und potenzielle Sicherheitslücken
+- Abhängigkeit von Hersteller-Updates
+- Teilweise hohe Systemanforderungen
+
+macOS-spezifisch:
+- Vorteile: gute Integration von Hard- und Software, hohe Stabilität, lange Update-Unterstützung.
+- Nachteile: eingeschränkte Hardware-Auswahl (starke Bindung an Apple-Geräte), geringere Spieleauswahl als bei Windows.
+
+8) Interessante Besonderheiten
+- Enge Verzahnung mit Apple-Ökosystem (iPhone, iPad, iCloud, AirDrop, Handoff).
+- UNIX-Unterbau mit gleichzeitig benutzerfreundlicher Oberfläche.
+- Fokus auf Energieeffizienz und Performance, besonders auf Apple-Silicon-Prozessoren.
+
+9) Scheduling-Strategien
+Scheduling bedeutet die Planung, welcher Prozess wann CPU-Zeit erhält. Wichtige Strategien sind:
+- First Come, First Served (FCFS): Bearbeitung in Ankunftsreihenfolge.
+- Round Robin: Prozesse erhalten nacheinander kurze Zeitscheiben.
+- Prioritätsbasiertes Scheduling: wichtige Prozesse werden bevorzugt.
+- Multilevel-Queue/Feedback: unterschiedliche Warteschlangen für verschiedene Prozessarten.
+macOS verwendet ein präemptives, prioritätsorientiertes Scheduling mit dynamischer Anpassung, damit interaktive Programme (z. B. Benutzeroberfläche) schnell reagieren und Hintergrundaufgaben dennoch zuverlässig bearbeitet werden.
