@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=LaserCollisionGame
+comment1.params=x1\ y1\ x2\ y2\ x3\ y3\ x4\ y4
+comment1.target=boolean\ segmentsIntersect(double,\ double,\ double,\ double,\ double,\ double,\ double,\ double)
+comment10.params=x1\ y1\ x2\ y2
+comment10.target=java.lang.String\ edgeKey(int,\ int,\ int,\ int)
+comment2.params=
+comment2.target=LaserCollisionGame()
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+comment4.params=label\ tool
+comment4.target=javax.swing.JButton\ makeToolButton(java.lang.String,\ LaserCollisionGame.Tool)
+comment5.params=
+comment5.target=void\ updateStatus()
+comment6.params=cellX\ cellY
+comment6.target=void\ placeAt(int,\ int)
+comment7.params=
+comment7.target=void\ recomputeLasers()
+comment8.params=x\ y
+comment8.target=long\ pack(int,\ int)
+comment9.params=x\ y\ d
+comment9.target=java.lang.String\ stateKey(int,\ int,\ int)
+numComments=11
